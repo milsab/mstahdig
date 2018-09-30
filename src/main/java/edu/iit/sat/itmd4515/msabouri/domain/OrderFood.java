@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +30,7 @@ public class OrderFood {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long orderId;
 
     @Temporal(TemporalType.DATE)
@@ -35,8 +38,19 @@ public class OrderFood {
     private Date orderDate;
     private Integer quantity;
     private Integer price;
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
+
+
 
     public OrderFood() {
+    }
+
+    public OrderFood(Date orderDate, Integer quantity, Integer price) {
+        this.orderDate = orderDate;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     /**
@@ -81,5 +95,11 @@ public class OrderFood {
     @Override
     public String toString() {
         return "OrderFood{" + "orderId=" + orderId + ", orderDate=" + orderDate + ", quantity=" + quantity + ", price=" + price + '}';
+    }
+    public Offer getOffer() {
+        return offer;
+    }
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

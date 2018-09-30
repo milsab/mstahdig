@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "offer_id")
     private Long offerId;
     private String title;
     private String description;
@@ -35,11 +37,19 @@ public class Offer {
     private Date createdDate;
     private Integer unitPrice;
     private Integer quantity;
-//    @OneToMany
-//    private List<OrderFood> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "offer")
+    private List<OrderFood> orders = new ArrayList<>();
     
 
     public Offer() {
+    }
+
+    public Offer(String title, String description, Date createdDate, Integer unitPrice, Integer quantity) {
+        this.title = title;
+        this.description = description;
+        this.createdDate = createdDate;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
 
@@ -96,11 +106,11 @@ public class Offer {
     public String toString() {
         return "Offer{" + "offerId=" + offerId + ", title=" + title + ", description=" + description + ", createdDate=" + createdDate + ", unitPrice=" + unitPrice + ", quantity=" + quantity + '}';
     }
-//    public List<OrderFood> getOrders() {
-//        return orders;
-//    }
-//    public void setOrders(List<OrderFood> orders) {
-//        this.orders = orders;
-//    }
+    public List<OrderFood> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<OrderFood> orders) {
+        this.orders = orders;
+    }
 
 }
