@@ -25,7 +25,7 @@ public class Buyer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long BuyerId;
+    private Long buyerId;
     private String firstName;
     private String lastName;
     private String gender;
@@ -38,12 +38,11 @@ public class Buyer {
     public Buyer() {
     }
 
-    public Buyer(String firstName, String lastName, String gender, Date birthday, Long BuyerId) {
+    public Buyer(String firstName, String lastName, String gender, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthday = birthday;
-        this.BuyerId = BuyerId;
     }
 
     /**
@@ -119,16 +118,16 @@ public class Buyer {
     }
 
     public Long getBuyerId() {
-        return BuyerId;
+        return buyerId;
     }
 
     public void setBuyerId(Long BuyerId) {
-        this.BuyerId = BuyerId;
+        this.buyerId = BuyerId;
     }
 
     @Override
     public String toString() {
-        return "Buyer{" + "BuyerId=" + BuyerId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + '}';
+        return "Buyer{" + "buyerId=" + buyerId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + '}';
     }
 
     public List<OrderFood> getOrders() {

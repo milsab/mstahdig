@@ -46,7 +46,7 @@ public class Offer {
     private List<OrderFood> orders = new ArrayList<>();
     
     @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_id", nullable = false)
+    @JoinColumn(name = "food_id")
     private Food food;
 
     public Offer() {

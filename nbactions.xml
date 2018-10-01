@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-SONAR</actionName>
+            <displayName>SONAR</displayName>
+            <goals>
+                <goal>sonar:sonar</goal>
+            </goals>
+            <properties>
+                <sonar.host.url>https://wheaton.rice.iit.edu/sonar/</sonar.host.url>
+                <sonar.login>74ec9d2baba86a23eec10caba744fa977c7d07b2</sonar.login>
+            </properties>
+        </action>
+    </actions>
