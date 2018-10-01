@@ -41,6 +41,10 @@ public class OrderFood {
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
+    
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
 
 
@@ -101,5 +105,13 @@ public class OrderFood {
     }
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 }

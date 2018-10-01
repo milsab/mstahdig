@@ -11,10 +11,13 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,13 +36,18 @@ public class Offer {
     private Long offerId;
     private String title;
     private String description;
+    
     @Temporal(TemporalType.DATE)
     private Date createdDate;
     private Integer unitPrice;
     private Integer quantity;
+    
     @OneToMany(mappedBy = "offer")
     private List<OrderFood> orders = new ArrayList<>();
     
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "food_id", nullable = false)
+    private Food food;
 
     public Offer() {
     }
@@ -111,6 +119,14 @@ public class Offer {
     }
     public void setOrders(List<OrderFood> orders) {
         this.orders = orders;
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
     }
 
 }

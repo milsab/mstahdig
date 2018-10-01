@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -50,6 +52,10 @@ public class Food {
     @Temporal(TemporalType.DATE)
     @Column(name = "date_cooked")
     private Date dateCooked;
+    
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
     /**
      * Each food can be listed in offer list up to three days. So, the
@@ -137,6 +143,14 @@ public class Food {
 
     public void setDateCooked(Date dateCooked) {
         this.dateCooked = dateCooked;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
 }
