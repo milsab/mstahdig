@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,6 +29,7 @@ public class Seller {
     private String firstName;
     private String lastName;
     private String gender;
+    @Temporal(TemporalType.DATE)
     private Date birthday;
     
     @OneToMany(mappedBy = "seller")
@@ -35,8 +38,7 @@ public class Seller {
     public Seller() {
     }
 
-    public Seller(Long sellerId, String firstName, String lastName, String gender, Date birthday) {
-        this.sellerId = sellerId;
+    public Seller(String firstName, String lastName, String gender, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
