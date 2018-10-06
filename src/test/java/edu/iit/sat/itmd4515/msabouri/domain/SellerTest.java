@@ -8,8 +8,11 @@ package edu.iit.sat.itmd4515.msabouri.domain;
 import static edu.iit.sat.itmd4515.msabouri.domain.AbstractJPATest.emf;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import org.junit.After;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -23,17 +26,12 @@ import org.junit.Test;
 public class SellerTest extends AbstractJPATest{
     @Before
     public void beforeEachTest() {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-
+        super.beforeEachTest();
     }
 
     @After
     public void afterEachTest() {
-
-        if (em != null) {
-            em.close();
-        }
+        super.afterEachTest();
     }
     
     @Test
@@ -59,6 +57,37 @@ public class SellerTest extends AbstractJPATest{
         Food f = em.find(Food.class, food_id);
         Assert.assertEquals("Seller assigned to the food correctly", "Milad", f.getSeller().getFirstName());
                 
+    }
+    
+    @Test
+    public void FirstNameIsNull(){
+        Seller seller = new Seller(null, "abc", "mail", 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        System.out.println(seller.toString());
+        
+        Set<ConstraintViolation<Seller>> constraintViolations = validator.validate(seller);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Seller> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
+    }
+    @Test
+    public void LastNameIsNull(){
+        Seller seller = new Seller("abc", null, "mail", 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        System.out.println(seller.toString());
+        
+        Set<ConstraintViolation<Seller>> constraintViolations = validator.validate(seller);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Seller> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
     }
     
 }
