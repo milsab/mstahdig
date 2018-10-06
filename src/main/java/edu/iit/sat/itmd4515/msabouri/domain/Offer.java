@@ -46,7 +46,6 @@ public class Offer {
     private Date createdDate;
     @Digits(integer = 4, fraction = 2)
     @Min(0)
-    @Max(9999)
     private BigDecimal unitPrice;
     private Integer quantity;
     
