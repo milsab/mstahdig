@@ -6,7 +6,10 @@
 package edu.iit.sat.itmd4515.msabouri.domain;
 
 import static edu.iit.sat.itmd4515.msabouri.domain.AbstractJPATest.emf;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,17 +25,12 @@ import org.junit.Test;
 public class CommentTest extends AbstractJPATest{
     @Before
     public void beforeEachTest() {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-
+        super.beforeEachTest();
     }
 
     @After
     public void afterEachTest() {
-
-        if (em != null) {
-            em.close();
-        }
+        super.afterEachTest();
     }
     
     @Test
@@ -63,5 +61,21 @@ public class CommentTest extends AbstractJPATest{
         assertTrue("Commnet can have a child", comment.getChildren().size() == 1);
         assertNotNull("Child comment must have a parent", childComment.getParent());
         
+    }
+    
+    @Test
+    public void textIsNull(){
+        Comment comment = new Comment("Title", null, 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        System.out.println(comment.toString());
+        
+        Set<ConstraintViolation<Comment>> constraintViolations = validator.validate(comment);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Comment> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
     }
 }
