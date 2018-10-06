@@ -9,7 +9,10 @@ import static edu.iit.sat.itmd4515.msabouri.domain.AbstractJPATest.emf;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,17 +23,12 @@ import org.junit.Test;
 public class OfferTest extends AbstractJPATest{
     @Before
     public void beforeEachTest() {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-
+        super.beforeEachTest();
     }
 
     @After
     public void afterEachTest() {
-
-        if (em != null) {
-            em.close();
-        }
+        super.afterEachTest();
     }
     
     @Test
@@ -41,5 +39,60 @@ public class OfferTest extends AbstractJPATest{
         tx.begin();
         em.persist(offer);
         tx.commit();
+    }
+    
+        @Test
+    public void priceIsNegativeTest(){
+        Offer offer = new Offer("title", "description", 
+                new GregorianCalendar(2018, 9, 23).getTime(), 
+                new BigDecimal("-1"), 2);
+        
+        System.out.println(offer.toString());
+        
+        Set<ConstraintViolation<Offer>> constraintViolations = validator.validate(offer);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must be greater than or equal to 0", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Offer> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
+    }
+    
+    @Test
+    public void priceHas2DigitsFractionTest(){
+        Offer offer = new Offer("title", "description", 
+                new GregorianCalendar(2018, 9, 23).getTime(), 
+                new BigDecimal("56.988"), 2);
+        
+        System.out.println(offer.toString());
+        
+        Set<ConstraintViolation<Offer>> constraintViolations = validator.validate(offer);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("numeric value out of bounds (<4 digits>.<2 digits> expected)", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Offer> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
+    }
+    
+    @Test
+    public void priceHas4DigitsIntegerTest(){
+        Offer offer = new Offer("title", "description", 
+                new GregorianCalendar(2018, 9, 23).getTime(), 
+                new BigDecimal("93489.02"), 2);
+        
+        System.out.println(offer.toString());
+        
+        Set<ConstraintViolation<Offer>> constraintViolations = validator.validate(offer);
+        
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("numeric value out of bounds (<4 digits>.<2 digits> expected)", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Offer> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        }
     }
 }

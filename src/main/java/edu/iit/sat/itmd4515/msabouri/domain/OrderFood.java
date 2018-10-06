@@ -45,7 +45,6 @@ public class OrderFood {
     private Integer quantity;
     @Digits(integer = 4, fraction = 2)
     @Min(0)
-    @Max(9999)
     private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "offer_id")
