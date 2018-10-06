@@ -18,21 +18,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Milad
  */
 @Entity
-public class Comment {
+public class Comment extends AbstractIdentifiedEntity{
 
     private static final Logger LOG = Logger.getLogger(Comment.class.getName());
 
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long commentId;
-
     private String title;
+    @NotNull
     private String text;
     @Temporal(TemporalType.DATE)
     private Date createdDate;
@@ -42,6 +40,7 @@ public class Comment {
     
     @ManyToOne
     @JoinColumn(name = "parent_id")
+    
     private Comment parent;
     
     public Comment() {
@@ -53,23 +52,6 @@ public class Comment {
         this.createdDate = createdDate;
     }
 
-    /**
-     * Get the value of commentId
-     *
-     * @return the value of commentId
-     */
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    /**
-     * Set the value of commentId
-     *
-     * @param commentId new value of commentId
-     */
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
     public String getTitle() {
         return title;
     }
@@ -93,7 +75,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" + "commentId=" + commentId + ", title=" + title + ", text=" + text + ", createdDate=" + createdDate + '}';
+        return "Comment{" + "commentId=" + super.getId() + ", title=" + title + ", text=" + text + ", createdDate=" + createdDate + '}';
     }
 
     public List<Comment> getChildren() {

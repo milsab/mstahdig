@@ -6,6 +6,7 @@
 package edu.iit.sat.itmd4515.msabouri.domain;
 
 import static edu.iit.sat.itmd4515.msabouri.domain.AbstractJPATest.emf;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import org.junit.After;
@@ -40,7 +41,7 @@ public class BuyerTest extends AbstractJPATest{
                 new GregorianCalendar(2018, 9, 23).getTime());
 
         OrderFood order = new OrderFood(
-                new GregorianCalendar(2018, 9, 23).getTime(), 2, 20);
+                new GregorianCalendar(2018, 9, 23).getTime(), 2, new BigDecimal("20.00"));
         
         order.setBuyer(buyer);
         

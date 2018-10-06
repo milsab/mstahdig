@@ -8,6 +8,8 @@ package edu.iit.sat.itmd4515.msabouri.domain;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
 import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.*;
@@ -22,10 +24,9 @@ import sun.util.calendar.Gregorian;
 public class FoodTest extends AbstractJPATest {
 
     @Before
+    @Override
     public void beforeEachTest() {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-
+        super.beforeEachTest();
         Food seed = new Food(
                 "SEED",
                 "SEED",
@@ -38,6 +39,7 @@ public class FoodTest extends AbstractJPATest {
     }
 
     @After
+    @Override
     public void afterEachTest() {
         Food seed = em
                 .createNamedQuery("Food.findByName", Food.class)
@@ -47,10 +49,27 @@ public class FoodTest extends AbstractJPATest {
         tx.begin();
         em.remove(seed);
         tx.commit();
-
-        if (em != null) {
-            em.close();
+        super.afterEachTest();
+    }
+    
+    @Test
+    public void nameIsNull(){
+        Food food = new Food(
+                null,
+                "Vegeterian",
+                Arrays.asList("Spinach", "Egg", "Olive Oil"),
+                new GregorianCalendar(2018, 9, 23).getTime());
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        
+        for(ConstraintViolation<Food> bad : constraintViolations){
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
         }
+
     }
 
     @Test
@@ -148,7 +167,7 @@ public class FoodTest extends AbstractJPATest {
         System.out.print(seed.getDescription());
         assertEquals("SEED", seed.getName());
     }
-    
+
     /**
      * RAINY DAY test for read FOOD
      */
@@ -160,7 +179,7 @@ public class FoodTest extends AbstractJPATest {
                 .getResultList();
         assertEquals(seeds.size(), 0);
     }
-    
+
     /**
      * SUNNY DAY test for update FOOD
      */

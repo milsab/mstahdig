@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  *
@@ -36,13 +38,11 @@ import javax.persistence.Transient;
             query = "select f from Food f where f.name = :name")
 })
 
-public class Food {
+public class Food extends AbstractIdentifiedEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "name", unique = true)
+    @NotNull
     private String name;
     private String description;
     @ElementCollection(fetch = FetchType.LAZY)
@@ -50,6 +50,7 @@ public class Food {
     private List<String> recipe;
 
     @Temporal(TemporalType.DATE)
+//    @PastOrPresent
     @Column(name = "date_cooked")
     private Date dateCooked;
     
@@ -75,13 +76,6 @@ public class Food {
         this.dateCooked = dateCooked;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * Get the value of name

@@ -5,7 +5,9 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,6 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -39,7 +44,10 @@ public class Offer {
     
     @Temporal(TemporalType.DATE)
     private Date createdDate;
-    private Integer unitPrice;
+    @Digits(integer = 4, fraction = 2)
+    @Min(0)
+    @Max(9999)
+    private BigDecimal unitPrice;
     private Integer quantity;
     
     @OneToMany(mappedBy = "offer")
@@ -52,10 +60,11 @@ public class Offer {
     public Offer() {
     }
 
-    public Offer(String title, String description, Date createdDate, Integer unitPrice, Integer quantity) {
+    public Offer(String title, String description, Date createdDate, BigDecimal unitPrice, Integer quantity) {
         this.title = title;
         this.description = description;
         this.createdDate = createdDate;
+        
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
@@ -97,10 +106,10 @@ public class Offer {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-    public Integer getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
-    public void setUnitPrice(Integer unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
     public Integer getQuantity() {

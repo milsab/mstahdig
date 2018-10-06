@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.persistence.Column;
@@ -17,6 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -36,8 +40,13 @@ public class OrderFood {
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
     private Date orderDate;
+    @Digits(integer = 3, fraction = 0)
+    @Min(1)
     private Integer quantity;
-    private Integer price;
+    @Digits(integer = 4, fraction = 2)
+    @Min(0)
+    @Max(9999)
+    private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
@@ -51,7 +60,7 @@ public class OrderFood {
     public OrderFood() {
     }
 
-    public OrderFood(Date orderDate, Integer quantity, Integer price) {
+    public OrderFood(Date orderDate, Integer quantity, BigDecimal price) {
         this.orderDate = orderDate;
         this.quantity = quantity;
         this.price = price;
@@ -89,10 +98,10 @@ public class OrderFood {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
