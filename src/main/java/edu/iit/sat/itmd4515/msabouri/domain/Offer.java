@@ -7,7 +7,6 @@ package edu.iit.sat.itmd4515.msabouri.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,8 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
@@ -39,14 +39,20 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offer_id")
     private Long offerId;
+    
     private String title;
     private String description;
     
     @Temporal(TemporalType.DATE)
     private Date createdDate;
-    @Digits(integer = 4, fraction = 2)
-    @Min(0)
+    
+//    @Digits(integer = 4, fraction = 2)
+//    @Min(0)
+    @DecimalMax("1000.00")
+    @DecimalMin("0.00")
     private BigDecimal unitPrice;
+    
+    @Min(1)
     private Integer quantity;
     
     @OneToMany(mappedBy = "offer")

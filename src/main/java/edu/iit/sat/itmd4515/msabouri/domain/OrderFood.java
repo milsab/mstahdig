@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -40,21 +41,21 @@ public class OrderFood {
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
     private Date orderDate;
-    @Digits(integer = 3, fraction = 0)
+    
+    @Max(999)
     @Min(1)
     private Integer quantity;
-    @Digits(integer = 4, fraction = 2)
-    @Min(0)
+
+    @DecimalMin("0.00")
     private BigDecimal price;
+    
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
-    
+
     @ManyToOne
     @JoinColumn(name = "buyer_id")
     private Buyer buyer;
-
-
 
     public OrderFood() {
     }
@@ -90,16 +91,19 @@ public class OrderFood {
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
-    
+
     public Integer getQuantity() {
         return quantity;
     }
+
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
     public BigDecimal getPrice() {
         return price;
     }
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
@@ -108,9 +112,11 @@ public class OrderFood {
     public String toString() {
         return "OrderFood{" + "orderId=" + orderId + ", orderDate=" + orderDate + ", quantity=" + quantity + ", price=" + price + '}';
     }
+
     public Offer getOffer() {
         return offer;
     }
+
     public void setOffer(Offer offer) {
         this.offer = offer;
     }

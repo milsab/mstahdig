@@ -64,15 +64,15 @@ public class CommentTest extends AbstractJPATest{
     }
     
     @Test
-    public void textIsNull(){
-        Comment comment = new Comment("Title", null, 
+    public void textIsBlank(){
+        Comment comment = new Comment("Title", " ", 
                 new GregorianCalendar(2018, 9, 23).getTime());
         System.out.println(comment.toString());
         
         Set<ConstraintViolation<Comment>> constraintViolations = validator.validate(comment);
         assertEquals(1, constraintViolations.size());
         
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be blank", constraintViolations.iterator().next().getMessage());
         
         for(ConstraintViolation<Comment> bad : constraintViolations){
             System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());

@@ -15,8 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.NotBlank;
 /**
  *
  * @author Milad
@@ -27,7 +26,7 @@ public class Comment extends AbstractIdentifiedEntity{
     private static final Logger LOG = Logger.getLogger(Comment.class.getName());
 
     private String title;
-    @NotNull
+    @NotBlank
     private String text;
     @Temporal(TemporalType.DATE)
     private Date createdDate;

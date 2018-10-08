@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,7 +21,11 @@ public class AbstractIdentifiedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
+    /**
+     * Default Constructor
+     */
     public AbstractIdentifiedEntity() {
+        // Do nothing 
     }
 
     public Long getId() {

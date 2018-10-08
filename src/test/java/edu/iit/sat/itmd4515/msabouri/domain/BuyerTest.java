@@ -59,30 +59,30 @@ public class BuyerTest extends AbstractJPATest{
     }
     
     @Test
-    public void FirstNameIsNull(){
-        Buyer buyer = new Buyer(null, "abc", "mail", 
+    public void FirstNameIsBlank(){
+        Buyer buyer = new Buyer(" ", "abc", "mail", 
                 new GregorianCalendar(2018, 9, 23).getTime());
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);
         assertEquals(1, constraintViolations.size());
         
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be blank", constraintViolations.iterator().next().getMessage());
         
         for(ConstraintViolation<Buyer> bad : constraintViolations){
             System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
         }
     }
     @Test
-    public void LastNameIsNull(){
-        Buyer buyer = new Buyer("abc", null, "mail", 
+    public void LastNameIsBlank(){
+        Buyer buyer = new Buyer("abc", " ", "mail", 
                 new GregorianCalendar(2018, 9, 23).getTime());
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);
         assertEquals(1, constraintViolations.size());
         
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("must not be blank", constraintViolations.iterator().next().getMessage());
         
         for(ConstraintViolation<Buyer> bad : constraintViolations){
             System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());

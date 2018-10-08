@@ -15,7 +15,6 @@ import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import sun.util.calendar.Gregorian;
 
 /**
  *
@@ -53,33 +52,13 @@ public class FoodTest extends AbstractJPATest {
     }
     
     @Test
-    public void nameIsNull(){
-        Food food = new Food(
-                null,
-                "Vegeterian",
-                Arrays.asList("Spinach", "Egg", "Olive Oil"),
-                new GregorianCalendar(2018, 9, 23).getTime());
-        System.out.println(food.toString());
-        
-        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
-        assertEquals(1, constraintViolations.size());
-        
-        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
-        
-        for(ConstraintViolation<Food> bad : constraintViolations){
-            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
-        }
-
-    }
-
-    @Test
     public void verifySeedDataSet() {
         List<Food> seeds = em
                 .createNamedQuery("Food.findByName", Food.class)
                 .setParameter("name", "SEED")
                 .getResultList();
 
-        assertEquals(seeds.size(), 1);
+        assertEquals(1, seeds.size());
         assertEquals("SEED", seeds.get(0).getName());
     }
 
@@ -138,7 +117,7 @@ public class FoodTest extends AbstractJPATest {
                 .setParameter("name", "SEED")
                 .getResultList();
 
-        assertEquals(seeds.size(), 0);
+        assertEquals(0, seeds.size());
 
         em = emf.createEntityManager();
         tx = em.getTransaction();
@@ -177,7 +156,7 @@ public class FoodTest extends AbstractJPATest {
                 .createNamedQuery("Food.findByName", Food.class)
                 .setParameter("name", "SEED2")
                 .getResultList();
-        assertEquals(seeds.size(), 0);
+        assertEquals(0, seeds.size());
     }
 
     /**
@@ -192,19 +171,96 @@ public class FoodTest extends AbstractJPATest {
         seed.setDescription("TestDescription");
         assertEquals("TestDescription", seed.getDescription());
     }
-
+    
     @Test
-    public void testAssertEquals() {
-        assertEquals("failure - strings are not equal", "text", "text");
+    public void nameIsBlank(){
+        Food food  = new Food(" ", "description", 
+                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be blank", constraintViolations.iterator().next().getMessage());
+        
+        constraintViolations.forEach((bad) -> {
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        });
     }
-
+    
     @Test
-    public void testAssertFalse() {
-        assertFalse("failure - should be false", false);
+    public void descriptionIsBlank(){
+        Food food  = new Food("title", " ", 
+                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be blank", constraintViolations.iterator().next().getMessage());
+        
+        constraintViolations.forEach((bad) -> {
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        });
     }
-
+    
     @Test
-    public void testAssertNotNull() {
-        assertNotNull("should not be null", new Object());
+    public void DateIsNull(){
+        Food food  = new Food("title", "description", 
+                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+                null);
+        
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must not be null", constraintViolations.iterator().next().getMessage());
+        
+        constraintViolations.forEach((bad) -> {
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        });
     }
+    
+    @Test
+    public void recipeHasAtLeastOneElement(){
+        Food food  = new Food("title", "description", 
+                null, 
+                new GregorianCalendar(2018, 9, 23).getTime());
+        
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("size must be between 1 and 20", constraintViolations.iterator().next().getMessage());
+        
+        constraintViolations.forEach((bad) -> {
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        });
+    }
+    
+//    @Test
+//    public void createdDateMustBePastOrPresent(){
+//        Food food  = new Food("title", "description", 
+//                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+//                "20:19:38");
+//        
+//        System.out.println(food.toString());
+//        
+//        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+//        assertEquals(1, constraintViolations.size());
+//        
+//        assertEquals("size must be between 1 and 20", constraintViolations.iterator().next().getMessage());
+//        
+//        constraintViolations.forEach((bad) -> {
+//            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+//        });
+//    }
+    
+    
 }
