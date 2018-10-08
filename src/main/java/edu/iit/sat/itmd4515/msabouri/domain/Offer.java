@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,8 +18,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
@@ -57,9 +59,9 @@ public class Offer {
     @OneToMany(mappedBy = "offer")
     private List<OrderFood> orders = new ArrayList<>();
     
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_id")
-    private Food food;
+    @ManyToMany (fetch = FetchType.LAZY)
+    @JoinTable(name = "food_offer", joinColumns = @JoinColumn(name = "offer_id"), inverseJoinColumns = @JoinColumn(name = "food_id"))
+    private List<Food> foods = new VirtualFlow.ArrayLinkedList<>();
 
     public Offer() {
     }
@@ -73,8 +75,16 @@ public class Offer {
         this.quantity = quantity;
     }
 
-
-
+    /**
+     * Helper function to manage both side of Many-to-Many relationship with Food
+     */
+    public void addFood(Food food){
+        if(!this.getFoods().contains(food))
+            this.getFoods().add(food);
+        if(!food.getOffers().contains(this))
+            food.getOffers().add(this);
+    }
+    
     /**
      * Get the value of offerId
      *
@@ -134,12 +144,12 @@ public class Offer {
         this.orders = orders;
     }
 
-    public Food getFood() {
-        return food;
+    public List<Food> getFoods() {
+        return foods;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CollectionTable;
@@ -13,6 +14,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -58,6 +60,10 @@ public class Food extends AbstractIdentifiedEntity {
     @Column(name = "date_cooked")
     private Date dateCooked;
     
+    @ManyToMany(mappedBy = "foods")
+    private List<Offer> offers = new ArrayList<>();
+    
+    
 //    @NotNull
     @ManyToOne
     @JoinColumn(name = "seller_id")
@@ -80,6 +86,16 @@ public class Food extends AbstractIdentifiedEntity {
         this.description = description;
         this.recipe = recipe;
         this.dateCooked = dateCooked;
+    }
+    
+    /**
+     * Helper function to manage both side of many-to-many relationship with Offer
+     */
+    public void addOffer(Offer offer){
+        if(!this.getOffers().contains(offer))
+            this.getOffers().add(offer);
+        if(!offer.getFoods().contains(this))
+            offer.getFoods().add(this);
     }
 
 
@@ -151,6 +167,14 @@ public class Food extends AbstractIdentifiedEntity {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
 }

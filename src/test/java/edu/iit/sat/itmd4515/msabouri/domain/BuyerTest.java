@@ -5,9 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
-import static edu.iit.sat.itmd4515.msabouri.domain.AbstractJPATest.emf;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -37,10 +35,10 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void persitenceSellerTest(){
         Buyer buyer = new Buyer("Nas", "Gha", "F", 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime());
 
         OrderFood order = new OrderFood(
-                new GregorianCalendar(2018, 9, 23).getTime(), 2, new BigDecimal("20.00"));
+                new GregorianCalendar(2017, 9, 23).getTime(), 2, new BigDecimal("20.00"));
         
         order.setBuyer(buyer);
         
@@ -61,7 +59,7 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void FirstNameIsBlank(){
         Buyer buyer = new Buyer(" ", "abc", "mail", 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime());
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);
@@ -76,7 +74,7 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void LastNameIsBlank(){
         Buyer buyer = new Buyer("abc", " ", "mail", 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime());
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);
