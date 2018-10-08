@@ -24,27 +24,24 @@ import org.junit.Test;
 public class OrderFoodTest extends AbstractJPATest {
 
     @Before
+    @Override
     public void beforeEachTest() {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-
+        super.beforeEachTest();
     }
 
     @After
+    @Override
     public void afterEachTest() {
-
-        if (em != null) {
-            em.close();
-        }
+        super.afterEachTest();
     }
 
     @Test
     public void persitenceOrderFoodTest() {
         OrderFood order = new OrderFood(
-                new GregorianCalendar(2018, 9, 23).getTime(), 1, new BigDecimal("17.00"));
+                new GregorianCalendar(2018, 7, 23).getTime(), 1, new BigDecimal("17.00"));
 
         Offer offer = new Offer("Offer Title", "Offer Description",
-                new GregorianCalendar(2018, 9, 23).getTime(), new BigDecimal("20.00"), 10);
+                new GregorianCalendar(2018, 7, 23).getTime(), new BigDecimal("20.00"), 10);
 
         offer.getOrders().add(order);
         order.setOffer(offer);
@@ -76,7 +73,7 @@ public class OrderFoodTest extends AbstractJPATest {
     @Test
     public void priceAcceptMinZeroTest() {
         OrderFood order = new OrderFood(
-                new GregorianCalendar(2018, 9, 23).getTime(), 
+                new GregorianCalendar(2018, 7, 23).getTime(), 
                 1, 
                 new BigDecimal("-1"));
 
@@ -91,5 +88,25 @@ public class OrderFoodTest extends AbstractJPATest {
         for (ConstraintViolation<OrderFood> bad : constraintViolations) {
             System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
         }
+    }
+    
+    @Test
+    public void orderDateMustBePastOrPresentTest() {
+        OrderFood order = new OrderFood(
+                new GregorianCalendar(2019, 9, 23).getTime(), 
+                1, 
+                new BigDecimal("10.00"));
+
+        System.out.println(order.toString());
+
+        Set<ConstraintViolation<OrderFood>> constraintViolations = validator.validate(order);
+
+        for (ConstraintViolation<OrderFood> bad : constraintViolations) {
+            System.out.println(bad.toString() + bad.getPropertyPath() + " " + bad.getMessage());
+        }
+        
+        assertEquals(1, constraintViolations.size());
+
+        assertEquals("must be a date in the past or in the present", constraintViolations.iterator().next().getMessage());
     }
 }

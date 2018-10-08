@@ -30,7 +30,7 @@ public class FoodTest extends AbstractJPATest {
                 "SEED",
                 "SEED",
                 Arrays.asList("SEED", "SEED", "SEED"),
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
 
         tx.begin();
         em.persist(seed);
@@ -71,7 +71,7 @@ public class FoodTest extends AbstractJPATest {
                 "Kooko",
                 "Vegeterian",
                 Arrays.asList("Spinach", "Egg", "Olive Oil"),
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
 
         tx.begin();
         assertNull("ID should be NULL until after em.persist()", food.getId());
@@ -91,7 +91,7 @@ public class FoodTest extends AbstractJPATest {
                 "SEED",
                 "SEED",
                 Arrays.asList("SEED", "SEED", "SEED"),
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
 
         tx.begin();
         em.persist(food);
@@ -126,7 +126,7 @@ public class FoodTest extends AbstractJPATest {
                 "SEED",
                 "SEED",
                 Arrays.asList("SEED", "SEED", "SEED"),
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
 
         tx.begin();
         em.persist(seed2);
@@ -176,7 +176,7 @@ public class FoodTest extends AbstractJPATest {
     public void nameIsBlank(){
         Food food  = new Food(" ", "description", 
                 Arrays.asList("Spinach", "Egg", "Olive Oil"), 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
         
         System.out.println(food.toString());
         
@@ -194,7 +194,7 @@ public class FoodTest extends AbstractJPATest {
     public void descriptionIsBlank(){
         Food food  = new Food("title", " ", 
                 Arrays.asList("Spinach", "Egg", "Olive Oil"), 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
         
         System.out.println(food.toString());
         
@@ -230,7 +230,7 @@ public class FoodTest extends AbstractJPATest {
     public void recipeHasAtLeastOneElement(){
         Food food  = new Food("title", "description", 
                 null, 
-                new GregorianCalendar(2018, 9, 23).getTime());
+                new GregorianCalendar(2018, 7, 23).getTime());
         
         System.out.println(food.toString());
         
@@ -244,23 +244,24 @@ public class FoodTest extends AbstractJPATest {
         });
     }
     
-//    @Test
-//    public void createdDateMustBePastOrPresent(){
-//        Food food  = new Food("title", "description", 
-//                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
-//                "20:19:38");
-//        
-//        System.out.println(food.toString());
-//        
-//        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
-//        assertEquals(1, constraintViolations.size());
-//        
-//        assertEquals("size must be between 1 and 20", constraintViolations.iterator().next().getMessage());
-//        
-//        constraintViolations.forEach((bad) -> {
-//            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
-//        });
-//    }
+    @Test
+    public void dateCookedMustBePastOrPresent(){
+        Food food  = new Food("title", "description", 
+                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+                new GregorianCalendar(2019, 7, 23).getTime());
+        
+        System.out.println(food.toString());
+        
+        Set<ConstraintViolation<Food>> constraintViolations = validator.validate(food);
+                
+        constraintViolations.forEach((bad) -> {
+            System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
+        });
+        
+        assertEquals(1, constraintViolations.size());
+        
+        assertEquals("must be a date in the past or in the present", constraintViolations.iterator().next().getMessage());
+    }
     
     
 }

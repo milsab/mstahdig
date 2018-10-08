@@ -22,7 +22,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
@@ -55,7 +54,7 @@ public class Food extends AbstractIdentifiedEntity {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-//    @Past
+    @PastOrPresent
     @Column(name = "date_cooked")
     private Date dateCooked;
     

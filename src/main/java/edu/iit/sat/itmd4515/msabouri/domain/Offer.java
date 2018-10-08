@@ -23,8 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  *
@@ -44,10 +44,9 @@ public class Offer {
     private String description;
     
     @Temporal(TemporalType.DATE)
+    @PastOrPresent
     private Date createdDate;
-    
-//    @Digits(integer = 4, fraction = 2)
-//    @Min(0)
+
     @DecimalMax("1000.00")
     @DecimalMin("0.00")
     private BigDecimal unitPrice;

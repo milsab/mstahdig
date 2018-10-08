@@ -19,9 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  *
@@ -40,6 +40,7 @@ public class OrderFood {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
+    @PastOrPresent
     private Date orderDate;
     
     @Max(999)
