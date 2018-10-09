@@ -164,12 +164,38 @@ public class FoodTest extends AbstractJPATest {
      */
     @Test
     public void updateFoodAndExpectSuccess() {
-        Food seed = em
-                .createNamedQuery("Food.findByName", Food.class)
-                .setParameter("name", "SEED")
-                .getSingleResult();
-        seed.setDescription("TestDescription");
-        assertEquals("TestDescription", seed.getDescription());
+//        Food seed = em
+//                .createNamedQuery("Food.findByName", Food.class)
+//                .setParameter("name", "SEED")
+//                .getSingleResult();
+//        seed.setDescription("TestDescription");
+//        assertEquals("TestDescription", seed.getDescription());
+
+        Food food = new Food("Milk", "Vegeterian", 
+                Arrays.asList("Spinach", "Egg", "Olive Oil"), 
+                new GregorianCalendar(2018, 7, 23).getTime());
+        
+        tx.begin();
+        em.persist(food);
+        tx.commit();
+        
+        assertTrue(em.contains(food));
+        
+        em.clear();
+        assertFalse(em.contains(food));
+        
+        food.setName("Bread");
+        tx.begin();
+        em.merge(food);
+        tx.commit();
+        
+        em.clear();
+        assertFalse(em.contains(food));
+        
+        food = em.find(Food.class, food.getId());
+        assertEquals(food.getName(), "Bread");
+        assertTrue(em.contains(food));
+        
     }
     
     @Test
