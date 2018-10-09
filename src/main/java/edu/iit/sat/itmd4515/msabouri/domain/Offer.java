@@ -37,14 +37,16 @@ public class Offer {
 
     private static final Logger LOG = Logger.getLogger(Offer.class.getName());
 
+    // <editor-fold desc="Attributes">
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offer_id")
     private Long offerId;
-    
+
     private String title;
     private String description;
-    
+
     @Temporal(TemporalType.DATE)
     @PastOrPresent
     private Date createdDate;
@@ -52,39 +54,59 @@ public class Offer {
     @DecimalMax("1000.00")
     @DecimalMin("0.00")
     private BigDecimal unitPrice;
-    
+
     @Min(1)
     private Integer quantity;
-    
+
     @OneToMany(mappedBy = "offer")
     private List<OrderFood> orders = new ArrayList<>();
-    
-    @ManyToMany (fetch = FetchType.LAZY)
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "food_offer", joinColumns = @JoinColumn(name = "offer_id"), inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> foods = new VirtualFlow.ArrayLinkedList<>();
 
+    // </editor-fold>
+    
+    
     public Offer() {
     }
-
+    
     public Offer(String title, String description, Date createdDate, BigDecimal unitPrice, Integer quantity) {
         this.title = title;
         this.description = description;
         this.createdDate = createdDate;
-        
+
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
-
+    
     /**
-     * Helper function to manage both side of Many-to-Many relationship with Food
+     * Helper function to manage both side of one-to-many relationship with
+     * OrderFood
      */
-    public void addFood(Food food){
-        if(!this.getFoods().contains(food))
-            this.getFoods().add(food);
-        if(!food.getOffers().contains(this))
-            food.getOffers().add(this);
+    public void addOrder(OrderFood order) {
+        if (!this.getOrders().contains(order)) {
+            this.getOrders().add(order);
+        }
+        if (!order.getOffer().equals(this)) {
+            order.setOffer(this);
+        }
     }
     
+    /**
+     * Helper function to manage both side of Many-to-Many relationship with
+     * Food
+     */
+    public void addFood(Food food) {
+        if (!this.getFoods().contains(food)) {
+            this.getFoods().add(food);
+        }
+        if (!food.getOffers().contains(this)) {
+            food.getOffers().add(this);
+        }
+    }
+
+    // <editor-fold desc="Setter/Getters">
     /**
      * Get the value of offerId
      *
@@ -102,33 +124,43 @@ public class Offer {
     public void setOfferId(Long offerId) {
         this.offerId = offerId;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Date getCreatedDate() {
         return createdDate;
     }
+
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
+
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
+
     public Integer getQuantity() {
         return quantity;
     }
+
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -137,9 +169,11 @@ public class Offer {
     public String toString() {
         return "Offer{" + "offerId=" + offerId + ", title=" + title + ", description=" + description + ", createdDate=" + createdDate + ", unitPrice=" + unitPrice + ", quantity=" + quantity + '}';
     }
+
     public List<OrderFood> getOrders() {
         return orders;
     }
+
     public void setOrders(List<OrderFood> orders) {
         this.orders = orders;
     }
@@ -151,5 +185,6 @@ public class Offer {
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
-
+    
+    // <editor-fold>
 }

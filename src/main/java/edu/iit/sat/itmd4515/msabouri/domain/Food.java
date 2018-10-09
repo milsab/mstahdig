@@ -97,6 +97,19 @@ public class Food extends AbstractIdentifiedEntity {
         if(!offer.getFoods().contains(this))
             offer.getFoods().add(this);
     }
+    
+    /**
+     * Helper function to manage both side of many-to-one relationship with
+     * Seller
+     */
+    public void addSeller(Seller seller) {
+        if (!this.getSeller().equals(seller)) {
+            this.setSeller(seller);
+        }
+        if (!seller.getFoods().contains(this)) {
+            seller.getFoods().add(this);
+        }
+    }
 
 
     /**

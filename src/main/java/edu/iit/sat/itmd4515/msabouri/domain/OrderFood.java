@@ -66,6 +66,32 @@ public class OrderFood {
         this.quantity = quantity;
         this.price = price;
     }
+    
+    /**
+     * Helper function to manage both side of many-to-one relationship with
+     * Offer
+     */
+    public void addOffer(Offer offer) {
+        if (!this.getOffer().equals(offer)) {
+            this.setOffer(offer);
+        }
+        if (!offer.getOrders().contains(this)) {
+            offer.getOrders().add(this);
+        }
+    }
+    
+    /**
+     * Helper function to manage both side of many-to-one relationship with
+     * Buyer
+     */
+    public void addBuyer(Buyer buyer) {
+        if (!this.getBuyer().equals(buyer)) {
+            this.setBuyer(buyer);
+        }
+        if (!buyer.getOrders().contains(this)) {
+            buyer.getOrders().add(this);
+        }
+    }
 
     /**
      * Get the value of orderId

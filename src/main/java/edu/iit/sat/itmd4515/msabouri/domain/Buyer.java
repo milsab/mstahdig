@@ -47,6 +47,19 @@ public class Buyer {
         this.gender = gender;
         this.birthday = birthday;
     }
+    
+    /**
+     * Helper function to manage both side of one-to-many relationship with
+     * OrderFood
+     */
+    public void addOrder(OrderFood order) {
+        if (!this.getOrders().contains(order)) {
+            this.getOrders().add(order);
+        }
+        if (!order.getBuyer().equals(this)) {
+            order.setBuyer(this);
+        }
+    }
 
     /**
      * Get the value of firstName

@@ -48,6 +48,26 @@ public class Comment extends AbstractIdentifiedEntity{
         this.createdDate = createdDate;
     }
 
+    /**
+     * Helper function to manage One-to-many relationship with Commnet
+     */
+    public void addChild(Comment child){
+        if(!this.getChildren().contains(child))
+            this.getChildren().add(child);
+        if(!child.getParent().equals(this))
+            child.setParent(this);
+    }
+    
+    /**
+     * Helper function to manage many-to-one relationship with Commnet
+     */
+    public void addParent(Comment parent){
+        if(!this.getParent().equals(parent))
+            this.setParent(parent);
+        if(!parent.getChildren().contains(this))
+            parent.getChildren().add(this);
+    }
+    
     public String getTitle() {
         return title;
     }

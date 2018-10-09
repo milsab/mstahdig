@@ -34,10 +34,10 @@ public class Seller {
     private String gender;
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    
+
     @OneToMany(mappedBy = "seller")
     private List<Food> foods = new ArrayList<>();
-    
+
     public Seller() {
     }
 
@@ -47,8 +47,21 @@ public class Seller {
         this.gender = gender;
         this.birthday = birthday;
     }
+
+    /**
+     * Helper function to manage both side of one-to-many relationship with
+     * Food
+     */
+    public void addFood(Food food) {
+        if (!this.getFoods().contains(food)) {
+            this.getFoods().add(food);
+        }
+        if (!food.getSeller().equals(this)) {
+            food.setSeller(this);
+        }
+    }
     
-        /**
+    /**
      * Get the value of firstName
      *
      * @return the value of firstName
@@ -119,9 +132,11 @@ public class Seller {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
     public Long getSellerId() {
         return sellerId;
     }
+
     public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
@@ -138,5 +153,5 @@ public class Seller {
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
-    
+
 }
