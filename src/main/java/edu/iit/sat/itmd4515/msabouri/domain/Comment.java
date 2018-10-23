@@ -49,7 +49,7 @@ public class Comment extends AbstractIdentifiedEntity{
     }
 
     /**
-     * Helper function to manage One-to-many relationship with Commnet
+     * Helper function to manage One-to-many relationship with Comment
      */
     public void addChild(Comment child){
         if(!this.getChildren().contains(child))
@@ -59,7 +59,7 @@ public class Comment extends AbstractIdentifiedEntity{
     }
     
     /**
-     * Helper function to manage many-to-one relationship with Commnet
+     * Helper function to manage many-to-one relationship with Comment
      */
     public void addParent(Comment parent){
         if(!this.getParent().equals(parent))

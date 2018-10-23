@@ -52,7 +52,7 @@ public class Food extends AbstractIdentifiedEntity {
     @Size(min = 1, max = 20)
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "recipe")
-    private List<String> recipe;
+    private List<String> recipes;
 
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -84,7 +84,7 @@ public class Food extends AbstractIdentifiedEntity {
     public Food(String name, String description, List<String> recipe, Date dateCooked) {
         this.name = name;
         this.description = description;
-        this.recipe = recipe;
+        this.recipes = recipe;
         this.dateCooked = dateCooked;
     }
     
@@ -149,21 +149,21 @@ public class Food extends AbstractIdentifiedEntity {
     }
 
     /**
-     * Get the value of recipe
+     * Get the value of recipes
      *
-     * @return the value of recipe
+     * @return the value of recipes
      */
-    public List<String> getRecipe() {
-        return recipe;
+    public List<String> getRecipes() {
+        return recipes;
     }
 
     /**
-     * Set the value of recipe
+     * Set the value of recipes
      *
-     * @param recipe new value of recipe
+     * @param recipes new value of recipes
      */
-    public void setRecipe(List<String> recipe) {
-        this.recipe = recipe;
+    public void setRecipes(List<String> recipes) {
+        this.recipes = recipes;
     }
 
     public Date getDateCooked() {

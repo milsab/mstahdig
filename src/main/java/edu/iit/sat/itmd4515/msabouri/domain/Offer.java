@@ -5,7 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +63,7 @@ public class Offer {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "food_offer", joinColumns = @JoinColumn(name = "offer_id"), inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private List<Food> foods = new VirtualFlow.ArrayLinkedList<>();
+    private List<Food> foods = new ArrayList<>();
 
     // </editor-fold>
     
