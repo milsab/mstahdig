@@ -36,7 +36,10 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(
             name = "Food.findByName",
-            query = "select f from Food f where f.name = :name")
+            query = "select f from Food f where f.name = :name"),
+    @NamedQuery(
+            name = "Food.findAll",
+            query = "select f from Food f")
 })
 
 public class Food extends AbstractIdentifiedEntity {

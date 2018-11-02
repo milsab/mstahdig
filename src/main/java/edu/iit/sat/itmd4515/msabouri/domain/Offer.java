@@ -20,6 +20,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +35,11 @@ import javax.validation.constraints.PastOrPresent;
  * @author Milad
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(
+            name = "Offer.findAll",
+            query = "select o from Offer o")
+})
 public class Offer {
 
     private static final Logger LOG = Logger.getLogger(Offer.class.getName());
