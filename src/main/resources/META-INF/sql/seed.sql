@@ -1,3 +1,16 @@
+insert ignore into sec_group(groupname, groupdesc) values('BUYER','This group contains buyers.');
+insert ignore into sec_group(groupname, groupdesc) values('SELLER','This group contains selleres.');
+
+insert ignore into sec_user(username, password, enabled) values('buyer1', 'buyer1', true); 
+insert ignore into sec_user(username, password, enabled) values('buyer2', 'buyer2', true); 
+insert ignore into sec_user(username, password, enabled) values('seller1', 'seller1', true); 
+insert ignore into sec_user(username, password, enabled) values('seller2', 'seller2', true); 
+
+insert ignore into sec_user_groups(username, groupname) values('buyer1','BUYER');
+insert ignore into sec_user_groups(username, groupname) values('buyer2','BUYER');
+insert ignore into sec_user_groups(username, groupname) values('seller1','SELLER');
+insert ignore into sec_user_groups(username, groupname) values('seller2','SELLER');
+
 insert into buyer(buyerid, birthday, firstname, lastname, gender) values(1, '1970-09-01', 'Alex', 'Wooden', 'mail');
 insert into seller(sellerid, birthday, firstname, lastname, gender) values(1, '1970-09-01', 'Chris', 'Hamilton', 'mail');
 

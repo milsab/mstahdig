@@ -7,6 +7,9 @@
     <class>edu.iit.sat.itmd4515.msabouri.domain.OrderFood</class>
     <class>edu.iit.sat.itmd4515.msabouri.domain.Buyer</class>
     <class>edu.iit.sat.itmd4515.msabouri.domain.Seller</class>
+    <class>edu.iit.sat.itmd4515.msabouri.domain.Customer</class>
+    <class>edu.iit.sat.itmd4515.msabouri.domain.security.Group</class>
+    <class>edu.iit.sat.itmd4515.msabouri.domain.security.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itmd4515?zeroDateTimeBehavior=convertToNull"/>

@@ -5,6 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
+import edu.iit.sat.itmd4515.msabouri.domain.security.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,9 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
@@ -42,8 +45,13 @@ public class Buyer {
     @Temporal(TemporalType.DATE)
     private Date birthday;
     
+
     @OneToMany(mappedBy = "buyer")
     private List<OrderFood> orders = new ArrayList<>();
+    
+    @OneToOne
+    @JoinColumn(name = "USERNAME")
+    private User user;
 
     public Buyer() {
     }
@@ -159,5 +167,11 @@ public class Buyer {
 
     public void setOrders(List<OrderFood> orders) {
         this.orders = orders;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }
