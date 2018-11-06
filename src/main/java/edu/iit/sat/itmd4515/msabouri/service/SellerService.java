@@ -5,7 +5,7 @@
  */
 package edu.iit.sat.itmd4515.msabouri.service;
 
-import edu.iit.sat.itmd4515.msabouri.domain.Buyer;
+import edu.iit.sat.itmd4515.msabouri.domain.Seller;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,22 +16,22 @@ import javax.persistence.PersistenceContext;
  * @author Milad
  */
 @Stateless
-public class BuyerService extends AbstractService<Buyer> {
-
+public class SellerService extends AbstractService<Seller> {
+    
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
     
-    public BuyerService() {
-        super(Buyer.class);
+    public SellerService() {
+        super(Seller.class);
     }
 
     @Override
-    public List<Buyer> findAll() {
-        return getEntityManager().createNamedQuery("Buyer.findAll", Buyer.class).getResultList();
+    public List<Seller> findAll() {
+        return getEntityManager().createNamedQuery("Seller.findAll", Seller.class).getResultList();
     }
     
-    public Buyer findByUserName(String username){
-        return getEntityManager().createNamedQuery("Buyer.findByUsername", Buyer.class).setParameter("username", username).getSingleResult();
+    public Seller findByUserName(String username){
+        return getEntityManager().createNamedQuery("Seller.findByUsername", Seller.class).setParameter("username", username).getSingleResult();
     }
     
 }

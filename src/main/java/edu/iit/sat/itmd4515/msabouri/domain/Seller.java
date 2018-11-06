@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -25,6 +27,18 @@ import javax.validation.constraints.NotBlank;
  * @author Milad
  */
 @Entity
+@NamedQueries({
+    
+    @NamedQuery(
+            name = "Seller.findAll",
+            query = "select s from Seller s"),
+    @NamedQuery(
+            name = "Seller.findName",
+            query = "select s from Seller s where s.lastName = :name"),
+    @NamedQuery(
+            name = "Seller.findByUsername",
+            query = "select s from Seller s where s.user.userName = :username")
+})
 public class Seller {
 
     @Id

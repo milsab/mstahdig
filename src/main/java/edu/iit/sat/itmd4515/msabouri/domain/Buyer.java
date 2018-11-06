@@ -28,9 +28,16 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 @NamedQueries({
+    
     @NamedQuery(
             name = "Buyer.findAll",
-            query = "select b from Buyer b")
+            query = "select b from Buyer b"),
+    @NamedQuery(
+            name = "Buyer.findName",
+            query = "select b from Buyer b where b.lastName = :name"),
+    @NamedQuery(
+            name = "Buyer.findByUsername",
+            query = "select b from Buyer b where b.user.userName = :username")
 })
 public class Buyer {
 
