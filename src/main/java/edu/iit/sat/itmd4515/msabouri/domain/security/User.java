@@ -13,7 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -45,12 +48,19 @@ public class User {
         this.password = password;
         this.enabled = enabled;
     }
-    
-    public void addGroup(Group group){
-        if(!this.groups.contains(group)){
+
+    @PrePersist
+    @PreUpdate
+    private void hashPassword() {
+        String digestPassword = DigestUtils.sha256Hex(this.password);
+        this.password = digestPassword;
+    }
+
+    public void addGroup(Group group) {
+        if (!this.groups.contains(group)) {
             this.groups.add(group);
         }
-        if(!group.getUsers().contains(this)){
+        if (!group.getUsers().contains(this)) {
             group.getUsers().add(this);
         }
     }
