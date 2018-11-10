@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/template/loginTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        Login Page
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form class="form-signin">
+            <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            
+            <h:outputLabel for="j_username" class="sr-only" value="Username"/>
+            <h:inputText value="#{loginController.username}" id="j_username" class="form-control" p:placeholder="Username" p:autofocus="autofocus" />
+            <h:message for="j_username" errorClass="text-danger"/>
+            
+            <h:outputLabel for="j_password" class="sr-only" value="Password"/>
+            <h:inputSecret value="#{loginController.password}" id="j_password" class="form-control" p:placeholder="Password" />
+            <h:message for="j_password" errorClass="text-danger"/>
+            
+            <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign in" action="#{loginController.doLogin()}"/>
+            <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
