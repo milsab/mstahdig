@@ -16,14 +16,25 @@
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             
             <h:outputLabel for="j_username" class="sr-only" value="Username"/>
-            <h:inputText value="#{loginController.username}" id="j_username" class="form-control" p:placeholder="Username" p:autofocus="autofocus" />
+            <h:inputText binding="#{j_username}" 
+                         value="#{loginController.username}" 
+                         id="j_username" 
+                         styleClass="#{j_username.valid ? 'form-control' : 'form-control is-invalid'}"
+                         p:placeholder="Username" 
+                         p:autofocus="autofocus" />
             <h:message for="j_username" errorClass="text-danger"/>
             
             <h:outputLabel for="j_password" class="sr-only" value="Password"/>
-            <h:inputSecret value="#{loginController.password}" id="j_password" class="form-control" p:placeholder="Password" />
+            <h:inputSecret binding = "#{j_password}" 
+                           value="#{loginController.password}" 
+                           id="j_password" 
+                           styleClass="#{j_password.valid ? 'form-control' : 'form-control is-invalid'}"
+                           p:placeholder="Password" />
             <h:message for="j_password" errorClass="text-danger"/>
             
-            <h:commandButton class="btn btn-lg btn-primary btn-block" value="Sign in" action="#{loginController.doLogin()}"/>
+            <h:commandButton class="btn btn-lg btn-primary btn-block" 
+                             value="Sign in" 
+                             action="#{loginController.doLogin()}"/>
             <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
         </h:form>
     </ui:define>

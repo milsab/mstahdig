@@ -5,11 +5,14 @@ insert ignore into sec_user(username, password, enabled) values('buyer1', SHA2('
 insert ignore into sec_user(username, password, enabled) values('buyer2', SHA2('buyer2', 256), true); 
 insert ignore into sec_user(username, password, enabled) values('seller1', SHA2('seller1', 256), true); 
 insert ignore into sec_user(username, password, enabled) values('seller2', SHA2('seller2', 256), true); 
+insert ignore into sec_user(username, password, enabled) values('milad', SHA2('milad', 256), true); 
 
 insert ignore into sec_user_groups(username, groupname) values('buyer1','BUYER');
 insert ignore into sec_user_groups(username, groupname) values('buyer2','BUYER');
+insert ignore into sec_user_groups(username, groupname) values('milad','BUYER');
 insert ignore into sec_user_groups(username, groupname) values('seller1','SELLER');
 insert ignore into sec_user_groups(username, groupname) values('seller2','SELLER');
+insert ignore into sec_user_groups(username, groupname) values('milad','SELLER');
 
 insert into buyer(buyerid, birthday, firstname, lastname, gender, username) values(1, '1970-09-01', 'Alex', 'Wooden', 'male', 'buyer1');
 insert into seller(sellerid, birthday, firstname, lastname, gender, username) values(1, '1970-09-01', 'Chris', 'Hamilton', 'male', 'seller1');

@@ -1,18 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../WEB-INF/template/portalTemplate.xhtml">
 
             <ui:define name="title">
-                Buyer
+                Welcome "#{loginController.remoteUser}"
             </ui:define>
 
-            <ui:define name="content">
-               Welcome #{loginController.remoteUser}
+            <ui:define name="content">                
+
+                <h3>List of Orders</h3>
+                <h:dataTable value="#{orderService.findAll()}" 
+                             var="order"
+                             styleClass="table table-striped table-hover">
+                    <h:column>
+                        <h:outputText value="#{order.orderId}"/>
+                        <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{order.orderDate}">
+                            <f:convertDateTime type="date" dateStyle="long"/>
+                        </h:outputText>
+                        <f:facet name="header"><h:outputText value="Order Date"/></f:facet>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{order.offer.title}"/>
+                        <f:facet name="header"><h:outputText value="Title"/></f:facet>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{order.buyer.user.userName}"/>
+                        <f:facet name="header"><h:outputText value="Username"/></f:facet>
+                    </h:column>
+
+                </h:dataTable>
             </ui:define>
 
         </ui:composition>

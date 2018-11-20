@@ -19,7 +19,7 @@ public abstract class AbstractController {
     }
 
     @PostConstruct
-    public void postConstruct() {
+    protected void postConstruct() {
         context = FacesContext.getCurrentInstance();
     }
 }

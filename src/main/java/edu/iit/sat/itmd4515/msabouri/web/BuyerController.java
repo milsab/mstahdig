@@ -17,13 +17,17 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class BuyerController {
+public class BuyerController extends AbstractController {
 
     private static final Logger LOG = Logger.getLogger(BuyerController.class.getName());
     
     private Buyer buyer;
+    
+    @Override
     @PostConstruct
-    private void postConstructor(){
+    protected void postConstruct(){
+        super.postConstruct();
+        buyer = new Buyer();       
         LOG.info("Inside BuyerController postConstructor");
     }
 

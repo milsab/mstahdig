@@ -21,7 +21,8 @@
             <h:panelGroup layout="block" 
                           class="alert alert-warning alert-dismissible" 
                           rendered="#{not empty facesContext.messageList and not facesContext.validationFailed}">
-                <h:messages showDetail="false"
+                <h:messages layout="table"
+                            showDetail="true"
                             errorClass="text-danger"
                             warnClass="text-danger"
                             infoClass="text-info"
