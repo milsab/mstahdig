@@ -5,8 +5,13 @@
  */
 package edu.iit.sat.itmd4515.msabouri.web;
 
+import edu.iit.sat.itmd4515.msabouri.service.BuyerService;
+import edu.iit.sat.itmd4515.msabouri.service.GroupService;
+import edu.iit.sat.itmd4515.msabouri.service.SellerService;
+import edu.iit.sat.itmd4515.msabouri.service.UserService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -24,29 +29,48 @@ import javax.validation.constraints.NotBlank;
 public class LoginController extends AbstractController {
 
     private static final Logger LOG = Logger.getLogger(LoginController.class.getName());
-    
+
     @NotBlank(message = "You must enter a Username")
     private String username;
     @NotBlank(message = "You must enter a Password")
     private String password;
+    
+    @NotBlank(message = "You must enter your first name")
+    private String firstName;
+    @NotBlank(message = "You must enter your last name")
+    private String lastName;
+    
+    private String birthday;
+    private String gender;
+    private String group;
+    
+
+    @EJB
+    private UserService userSvc;
+    @EJB
+    private GroupService groupSvc;
+//    @EJB
+//    private BuyerService buyerSvc;
+//    @EJB
+//    private SellerService sellerService;
 
     public LoginController() {
     }
-    
+
     //action methods
-    public String doLogin(){
+    public String doLogin() {
         try {
             HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            req.login(username, username);
-            return "/welcome?faces-redirect=true";
+            req.login(username, username);            
+            return "/welcome?faces-redirect=true";            
         } catch (ServletException ex) {
             LOG.log(Level.SEVERE, null, ex);
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Faild", "Please check your username or password and try again."));
             return "/login";
         }
     }
-    
-    public String doLogout(){
+
+    public String doLogout() {
         try {
             HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
             req.logout();
@@ -57,8 +81,7 @@ public class LoginController extends AbstractController {
 
         return "/login?faces-redirect=true";
     }
-    
-    
+
     // helper methods for login process
     public String getRemoteUser() {
         return context.getExternalContext().getRemoteUser();
@@ -94,7 +117,6 @@ public class LoginController extends AbstractController {
         this.username = username;
     }
 
-
     /**
      * Get the value of password
      *
@@ -111,6 +133,46 @@ public class LoginController extends AbstractController {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
 }

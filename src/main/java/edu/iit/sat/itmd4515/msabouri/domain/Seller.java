@@ -37,6 +37,9 @@ import javax.validation.constraints.NotBlank;
             query = "select s from Seller s where s.lastName = :name"),
     @NamedQuery(
             name = "Seller.findByUsername",
+            query = "select s from Seller s where s.user.userName = :username"),
+    @NamedQuery(
+            name = "Seller.findIdByUsername",
             query = "select s from Seller s where s.user.userName = :username")
 })
 public class Seller {
@@ -59,6 +62,9 @@ public class Seller {
     @OneToOne
     @JoinColumn(name = "USERNAME")
     private User user;
+    
+    @OneToMany(mappedBy = "seller")
+    private List<Offer> offers = new ArrayList<>();
 
     public Seller() {
     }
@@ -180,6 +186,14 @@ public class Seller {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
 }

@@ -41,7 +41,7 @@ public class OrderFoodTest extends AbstractJPATest {
                 new GregorianCalendar(2018, 7, 23).getTime(), 1, new BigDecimal("17.00"));
 
         Offer offer = new Offer("Offer Title", "Offer Description",
-                new GregorianCalendar(2018, 7, 23).getTime(), new BigDecimal("20.00"), 10);
+                new GregorianCalendar(2018, 7, 23).getTime(), new BigDecimal("20.00"), 10, "", "");
 
         offer.getOrders().add(order);
         order.setOffer(offer);

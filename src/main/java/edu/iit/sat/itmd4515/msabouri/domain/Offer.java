@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
 
@@ -20,11 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -39,13 +36,20 @@ import javax.validation.constraints.PastOrPresent;
     @NamedQuery(
             name = "Offer.findAll",
             query = "select o from Offer o")
+    ,
+    @NamedQuery(
+            name = "Offer.findByUsername",
+            query = "select o from Offer o where o.seller.user.userName = :username"),
 })
 public class Offer {
 
     private static final Logger LOG = Logger.getLogger(Offer.class.getName());
 
-    // <editor-fold desc="Attributes">
+    public static Logger getLOG() {
+        return LOG;
+    }
 
+    // <editor-fold desc="Attributes">
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offer_id")
@@ -72,21 +76,44 @@ public class Offer {
     @JoinTable(name = "food_offer", joinColumns = @JoinColumn(name = "offer_id"), inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> foods = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
+    
+    
+    private String recipe;
+    
+    @Column(name = "image_file")
+    private String imageFile;
+    
+    @Transient
+    private Integer qty;
+
+    
     // </editor-fold>
-    
-    
     public Offer() {
+        this.createdDate = new Date();
+        this.qty = new Integer(0);
     }
-    
-    public Offer(String title, String description, Date createdDate, BigDecimal unitPrice, Integer quantity) {
+
+    public Offer(String title, String description, Date createdDate, BigDecimal unitPrice, Integer quantity, String recipe, String imageFile) {
         this.title = title;
         this.description = description;
         this.createdDate = createdDate;
 
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+        this.recipe = recipe;
+        this.imageFile = imageFile;
+
+        if (this.createdDate == null) {            
+            this.createdDate = new Date();
+        } else{
+            this.createdDate = createdDate;
+        }
+
     }
-    
+
     /**
      * Helper function to manage both side of one-to-many relationship with
      * OrderFood
@@ -99,7 +126,7 @@ public class Offer {
             order.setOffer(this);
         }
     }
-    
+
     /**
      * Helper function to manage both side of Many-to-Many relationship with
      * Food
@@ -192,6 +219,37 @@ public class Offer {
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
-    
+
     // <editor-fold>
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public String getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+
+    public String getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
 }
