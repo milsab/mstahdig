@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/template/loginTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Register
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form class="form-signin">
+            <span class="fas fa-utensils fa-5x animated zoomin"></span>
+            <h2 class="mb-3 font-weight-normal">Create your account. It's free!</h2>
+
+            <h:outputLabel for="fname" class="sr-only" value="First Name"/>
+            <h:inputText value="#{registerController.firstName}" id="fname" 
+                         class="form-control" p:placeholder="First Name" 
+                         p:autofocus="autofocus" />
+            <h:message for="fname" errorClass="text-danger"/>
+
+            <h:outputLabel for="lname" class="sr-only" value="Last Name"/>
+            <h:inputText value="#{registerController.lastName}" id="lname" 
+                         class="form-control" p:placeholder="Last Name" 
+                         p:autofocus="autofocus" />
+            <h:message for="lname" errorClass="text-danger"/>             
+
+            <h:outputLabel for="gender" class="sr-only" value="Gender"/>
+            <h:selectOneMenu value="#{registerController.gender}" class="form-control" id="gender">
+                <f:selectItem itemValue="male" itemLabel="Male" />
+                <f:selectItem itemValue="female" itemLabel="Female" />
+            </h:selectOneMenu>
+            <h:message for="gender" errorClass="text-danger"/>  
+
+            <h:outputLabel for="group" class="sr-only" value="Group"/>
+            <h:selectOneMenu value="#{registerController.group}" class="form-control" id="group">
+                <f:selectItem itemValue="BUYER" itemLabel="BUYER" />
+                <f:selectItem itemValue="SELLER" itemLabel="SELLER" />
+            </h:selectOneMenu>
+            <h:message for="gender" errorClass="text-danger"/>              
+
+            <h:outputLabel for="email" class="sr-only" value="Email"/>
+            <h:inputText value="#{registerController.email}" id="email" class="form-control" p:placeholder="Email" p:autofocus="autofocus" />
+            <h:message for="email" errorClass="text-danger"/>
+
+            <h:outputLabel for="username" class="sr-only" value="Username"/>
+            <h:inputText value="#{registerController.username}" id="username" class="form-control" p:placeholder="Username" p:autofocus="autofocus" />
+            <h:message for="username" errorClass="text-danger"/>
+
+            <h:outputLabel for="password" class="sr-only" value="Password"/>
+            <h:inputSecret value="#{registerController.password}" id="password" class="form-control" p:placeholder="Password" />
+            <h:message for="password" errorClass="text-danger"/>                        
+
+            <h:commandButton class="btn btn-lg btn-primary btn-block" 
+                             value="Sign Up" 
+                             action="#{registerController.doSignUp(registerController)}"/>
+            <br/><p>Already have an account? <a href="./login.xhtml">Sign in</a></p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
