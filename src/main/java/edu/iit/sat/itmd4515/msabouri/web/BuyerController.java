@@ -6,9 +6,13 @@
 package edu.iit.sat.itmd4515.msabouri.web;
 
 import edu.iit.sat.itmd4515.msabouri.domain.Buyer;
+import edu.iit.sat.itmd4515.msabouri.domain.OrderFood;
+import edu.iit.sat.itmd4515.msabouri.service.BuyerService;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -22,13 +26,19 @@ public class BuyerController extends AbstractController {
     private static final Logger LOG = Logger.getLogger(BuyerController.class.getName());
     
     private Buyer buyer;
+    private OrderFood order;
+    
+    @EJB private BuyerService buyerSvc;
+    @Inject private LoginController loginController;
     
     @Override
     @PostConstruct
     protected void postConstruct(){
         super.postConstruct();
-        buyer = new Buyer();       
         LOG.info("Inside BuyerController postConstructor");
+        buyer = buyerSvc.findByUserName(loginController.getRemoteUser());
+        order = new OrderFood();
+        
     }
 
     /**
