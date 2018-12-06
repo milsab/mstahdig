@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+       <title><ui:insert name="title">First Title</ui:insert></title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content="Milad"/>
+
+        <title>Second Title</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+        <!-- Custom styles for this template -->
+        <h:outputStylesheet library="css" name="album.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Pattaya|Permanent+Marker" rel="stylesheet"/>
+        <!--Fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" 
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+    </h:head>
+
+    <h:body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+            <a class="navbar-brand" id="smallLogoBanner" href="#"><span class="fas fa-utensils"> </span>Tahdig</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <h:link class="nav-link" outcome="/welcome.xhtml" value="Home"/>
+                    </li>
+
+                    <ui:fragment rendered="#{loginController.buyer}" class="uiFragment">
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/buyer/order.xhtml" value="My Orders"/>
+                        </li>
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/buyer/profile.xhtml" value="My Profile"/>
+                        </li>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{loginController.seller}" class="uiFragment">                        
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/seller/offer.xhtml" value="My Offers"/>
+                        </li>
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/seller/profile.xhtml" value="My Profile"/>
+                        </li>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{loginController.admin}" class="uiFragment">
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/admin/welcome.xhtml" value="Admin Page"/>
+                        </li>
+                        <li class="nav-item">
+                            <h:link class="nav-link" outcome="/admin/site/apidocs/index.html" value="API DOCS" target="_blank"/>
+                        </li>
+                    </ui:fragment>
+
+                    <h:form class="uiFragment">
+                        <li class="nav-item">                            
+                            <h:commandLink class="nav-link" action="#{loginController.doLogout()}" value="Logout" />                            
+                        </li>
+                    </h:form>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <main role="main" class="container headerBeyondNavBar">                   
+            <h1><ui:insert name="title">Portal Title</ui:insert></h1>
+            <ui:insert name="content">Default Content</ui:insert>
+        </main>
+        
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2018 Tahdig</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+
+    </h:body>
+
+</html>

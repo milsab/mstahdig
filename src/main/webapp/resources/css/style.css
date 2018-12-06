@@ -1,19 +1,84 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : Oct 18, 2018, 7:04:46 PM
     Author     : Milad
 */
 
 body {
-  padding-top: 5rem;
+    margin: 0px;
+    padding: 0px;
 }
 
-.starter-template {
+/*.starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
+}*/
+
+.fa-utensils{
+    padding: 3px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
 }
 
+#carouselExampleFade img{
+    height: 400px;
+}
+
+#HomePageTitle1 {
+    font-family: 'Pattaya', sans-serif;
+    font-size: 6em;
+
+}
+
+#HomePageTitle2{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+}
+
+#smallLogoBanner{
+    font-family: 'Pattaya', sans-serif;
+}
+
+/*imortant*/
+.uiFragment{
+    margin: 0px;
+}
+
+#MyMain.container{
+    /*background-color: red;*/
+    width: 100%;
+    /*width: 2000px;*/
+    /*position:fixed;*/
+    /*margin: 0px;*/
+    padding: 0px;
+}
+
+.qyt{
+    width: 50px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.offerImage{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 20px;
+}
+
+.offerImageTable{
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 20px;
+}
+
+.offerLabels{
+    font-weight: bold;
+}
+
+.headerBeyondNavBar{
+    margin-top: 100px;
+}

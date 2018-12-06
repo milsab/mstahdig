@@ -17,11 +17,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 
         <!-- Custom styles for this template -->
+        <h:outputStylesheet library="css" name="album.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
+
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Pattaya|Permanent+Marker" rel="stylesheet"/>
+        <!--Fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" 
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
     </h:head>
     <h:body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#">Tahdig</a>
+
+            <a class="navbar-brand" id="smallLogoBanner" href="#"><span class="fas fa-utensils"> </span>Tahdig</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,32 +40,36 @@
                         <h:link class="nav-link" outcome="/welcome.xhtml" value="Home"/>
                     </li>
 
-                    <ui:fragment rendered="#{loginController.buyer}">
-                        <li class="#{fn:startsWith(view.viewId, '/buyer') ? 'nav-item active': 'nav-item'}">
-                            <h:link class="nav-link" outcome="/buyer/welcome.xhtml" value="Buyer Portal"/>
+                    <ui:fragment rendered="#{loginController.buyer}" class="uiFragment">
+                        <li class="#{fn:startsWith(view.viewId, '/buyer/order.xhtml') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/buyer/order.xhtml" value="My Orders"/>
+                        </li>
+                        <li class="#{fn:startsWith(view.viewId, '/profile') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/buyer/profile.xhtml" value="My Profile"/>
                         </li>
                     </ui:fragment>
 
-                    <ui:fragment rendered="#{loginController.seller}">
-                        <li class="#{fn:startsWith(view.viewId, '/seller') ? 'nav-item active': 'nav-item'}">
-                            <h:link class="nav-link" outcome="/seller/welcome.xhtml" value="Seller Portal"/>
+                    <ui:fragment rendered="#{loginController.seller}" class="uiFragment">                        
+                        <li class="#{fn:startsWith(view.viewId, '/seller/offer.xhtml') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/seller/offer.xhtml" value="My Offers"/>
+                        </li>
+                        <li class="#{fn:startsWith(view.viewId, '/seller/profile.xhtml') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/seller/profile.xhtml" value="My Profile"/>
                         </li>
                     </ui:fragment>
 
-                    <ui:fragment rendered="#{loginController.admin}">
+                    <ui:fragment rendered="#{loginController.admin}" class="uiFragment">
                         <li class="#{fn:startsWith(view.viewId, '/admin') ? 'nav-item active': 'nav-item'}">
-                            <h:link class="nav-link" outcome="/admin/welcome.xhtml" value="Admin Portal"/>
+                            <h:link class="nav-link" outcome="/admin/welcome.xhtml" value="Admin Page"/>
                         </li>
                     </ui:fragment>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <h:form>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <h:commandLink class="dropdown-item" action="#{loginController.doLogout()}" value="Logout" />
-                            </div>
-                        </h:form>
-                    </li>
+
+                    <h:form class="uiFragment">
+                        <li class="nav-item">                            
+                            <h:commandLink class="nav-link" action="#{loginController.doLogout()}" value="Logout" />                            
+                        </li>
+                    </h:form>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
@@ -66,12 +78,63 @@
             </div>
         </nav>
 
-        <main role="main" class="container">
+        <main role="main" class="container" id="MyMain">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h:graphicImage class="d-block w-100" library="images" name="vegi.jpg" alt=""/>
+                    </div>
+                    <div class="carousel-item">
+                        <h:graphicImage class="d-block w-100" library="images" name="sushi.jpg" alt=""/>
+                    </div>
+                    <div class="carousel-item">
+                        <h:graphicImage class="d-block w-100" library="images" name="steak.jpg" alt=""/>
+                    </div>
+                    <div class="carousel-item">
+                        <h:graphicImage class="d-block w-100" library="images" name="tahdig.jpeg" alt=""/>
+                    </div>
+                    <div class="carousel-item">
+                        <h:graphicImage class="d-block w-100" library="images" name="burito.jpg" alt=""/>
+                    </div>               
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <section class="text-center">
+                <div class="container">
+                    <h1 id="HomePageTitle1" class="jumbotron-heading">Tahdig</h1>
+                    <p id="HomePageTitle2" class="lead text-muted">Home-Cooked Meal Sharing</p>
+                </div>
+                <ui:fragment rendered="#{loginController.buyer}">
+                    <p>
+                        <h:link outcome="/buyer/browse.xhtml" value="Browse Offers" class="btn btn-success my-2"/>
+                    </p>
+                </ui:fragment>
+                <ui:fragment rendered="#{loginController.seller}">
+                    <p>
+                        <h:link outcome="/seller/addOffer.xhtml" value="Make an Offer" class="btn btn-primary my-2"/>                                            
+                    </p>
+                </ui:fragment>
+            </section>
 
             <h1><ui:insert name="title">Portal Title</ui:insert></h1>
             <ui:insert name="content">Default Content</ui:insert>
 
         </main><!-- /.container -->
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2018 Tahdig</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -79,6 +142,8 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+
+
     </h:body>
 </html>
 
