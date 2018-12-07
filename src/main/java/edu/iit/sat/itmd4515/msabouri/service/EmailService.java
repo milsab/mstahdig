@@ -59,7 +59,7 @@ public class EmailService implements Runnable{
                     + "<h3>The First Meal Sharing Platform</h3>"
                     + "<em>Your Username: " + username 
                     + "</em><br/><em>Your Password: " + userpass
-                    + "</em><br/><a href='http://lasalle.sat.iit.edu:8080/tahdig/'>Click here to go to the TAHDIG service</a></body>", 
+                    + "</em><br/><a href='http://localhost:8080/msabouri-fp/'>Click here to go to the TAHDIG service</a></body>", 
                     "text/html; charset=utf8");
             Transport.send(message);
             System.out.println("message sent successfully");
