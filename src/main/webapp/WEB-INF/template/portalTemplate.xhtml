@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title><ui:insert name="title">First Title</ui:insert></title>
         <meta charset="utf-8"/>
@@ -29,7 +30,7 @@
     <h:body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 
-            <a class="navbar-brand" id="smallLogoBanner" href="#"><span class="fas fa-utensils"> </span>Tahdig</a>
+            <h:link class="navbar-brand" id="smallLogoBanner" outcome="/welcome.xhtml"><span class="fas fa-utensils"> </span>Tahdig</h:link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,10 +72,17 @@
                         </li>
                     </h:form>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <ui:fragment rendered="#{loginController.buyer}" class="uiFragment">
+                    <h:form class="form-inline my-2 my-lg-0">
+                        <h:inputText  value="#{searchController.keyword}" 
+                                      id="search" 
+                                      class="form-control mr-sm-2" 
+                                      p:placeholder="Search" />
+                        <h:commandLink action="#{offerService.findAllBySearch(searchController.keyword)}"
+                                       class="btn btn-outline-success my-2 my-sm-0"  
+                                       value="Search" />
+                    </h:form>
+                </ui:fragment>
             </div>
         </nav>
 

@@ -1,13 +1,13 @@
 insert ignore into sec_group(groupname, groupdesc) values('BUYER','This group contains buyers.');
 insert ignore into sec_group(groupname, groupdesc) values('SELLER','This group contains selleres.');
-
+insert ignore into sec_group(groupname, groupdesc) values('ADMINS','This group contains admins.');
 
 insert ignore into sec_user(username, password, enabled) values('buyer1', SHA2('buyer1', 256), true); 
 insert ignore into sec_user(username, password, enabled) values('buyer2', SHA2('buyer2', 256), true); 
 insert ignore into sec_user(username, password, enabled) values('seller1', SHA2('seller1', 256), true); 
 insert ignore into sec_user(username, password, enabled) values('seller2', SHA2('seller2', 256), true);
 insert ignore into sec_user(username, password, enabled) values('milad', SHA2('milad', 256), true); 
-
+insert ignore into sec_user(username, password, enabled) values('admin', SHA2('admin', 256), true); 
 
 insert ignore into sec_user_groups(username, groupname) values('buyer1','BUYER');
 insert ignore into sec_user_groups(username, groupname) values('buyer2','BUYER');
@@ -15,7 +15,7 @@ insert ignore into sec_user_groups(username, groupname) values('milad','BUYER');
 insert ignore into sec_user_groups(username, groupname) values('seller1','SELLER');
 insert ignore into sec_user_groups(username, groupname) values('seller2','SELLER');
 insert ignore into sec_user_groups(username, groupname) values('milad','SELLER');
-
+insert ignore into sec_user_groups(username, groupname) values('admin','ADMINS');
 
 insert into BUYER(buyerid, birthday, firstname, lastname, gender, username) values(1, '1970-09-01', 'Alex', 'Wooden', 'male', 'buyer1');
 insert into BUYER(buyerid, birthday, firstname, lastname, gender, username) values(2, '1980-09-01', 'Jack', 'Smith', 'male', 'buyer2');

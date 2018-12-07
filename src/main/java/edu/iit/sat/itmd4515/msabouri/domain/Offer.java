@@ -35,11 +35,16 @@ import javax.validation.constraints.PastOrPresent;
 @NamedQueries({
     @NamedQuery(
             name = "Offer.findAll",
-            query = "select o from Offer o")
-    ,
+            query = "SELECT o FROM Offer o"),
+    @NamedQuery(
+            name = "Offer.findAllAvailables",
+            query = "SELECT o FROM Offer o WHERE o.quantity > 0"),
     @NamedQuery(
             name = "Offer.findByUsername",
-            query = "select o from Offer o where o.seller.user.userName = :username"),
+            query = "SELECT o FROM Offer o WHERE o.seller.user.userName = :username"),
+    @NamedQuery(
+            name = "Offer.findBySearch",
+            query = "SELECT o FROM Offer o WHERE o.title LIKE :keyword AND o.quantity > 0")
 })
 public class Offer {
 
@@ -66,7 +71,7 @@ public class Offer {
     @DecimalMin("0.00")
     private BigDecimal unitPrice;
 
-    @Min(1)
+    @Min(0)
     private Integer quantity;
 
     @OneToMany(mappedBy = "offer")

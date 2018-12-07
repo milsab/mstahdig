@@ -5,7 +5,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:pf="http://primefaces.org/ui"
                 xmlns="http://www.w3.org/1999/xhtml">
 
     <ui:define name="title">
@@ -15,9 +15,9 @@
     <ui:define name="content">
 
         <h:form enctype="multipart/form-data"  prependId="false">
-            <p:accordionPanel value="#{offerService.findAll()}"
+            <pf:accordionPanel value="#{offerService.findAllAvailables()}"
                               var ="offer">
-                <p:tab title="#{offer.title}">
+                <pf:tab title="#{offer.title}">
                     <h:graphicImage library="images" name="#{offer.imageFile}" class="offerImage"/>  
                     <h:outputLabel class="offerLabels">ID:&nbsp;</h:outputLabel>
                     <h:outputText value="#{offer.offerId}"/>
@@ -35,9 +35,7 @@
                     <br/>
                     <h:outputLabel class="offerLabels">Quantity:&nbsp;</h:outputLabel>
                     <h:outputText value="#{offer.quantity}"/>
-
                     <br/>
-
                     <h:outputText value="qty: "/>
                     <h:inputText  value="#{offer.qty}" 
                                   binding="#{qyt}"
@@ -47,8 +45,8 @@
                     <h:commandLink action="#{buyerController.doAddOrder(offer)}" 
                                    class="btn btn-primary" value="Order"/>
 
-                </p:tab>
-            </p:accordionPanel>
+                </pf:tab>
+            </pf:accordionPanel>
         </h:form>
     </ui:define>
 

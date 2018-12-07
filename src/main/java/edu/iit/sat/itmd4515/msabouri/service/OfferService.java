@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.iit.sat.itmd4515.msabouri.service;
 
 import edu.iit.sat.itmd4515.msabouri.domain.Offer;
@@ -12,8 +7,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.Part;
 
 /**
@@ -29,17 +22,11 @@ public class OfferService extends AbstractService<Offer> {
 
     private Part uploadedFile;
 
-    /**
-     *
-     */
+    private List<Offer> searchResults;
+    
     public OfferService() {
         super(Offer.class);
     }
-
-//    @Override
-//    public List<Offer> findAll(String s) {
-//
-//    }
 
     public List<Offer> findByUserName(String username) {
         return getEntityManager()
@@ -75,6 +62,22 @@ public class OfferService extends AbstractService<Offer> {
                 .createNamedQuery("Offer.findAll", Offer.class)
                 .getResultList();
     }
+    
+    public String findAllBySearch(String keyword){
+        
+         searchResults = getEntityManager()
+                .createNamedQuery("Offer.findBySearch", Offer.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
+         return "/buyer/searchResults";
+                
+    }
+    
+    public List<Offer> findAllAvailables(){
+        return getEntityManager()
+                .createNamedQuery("Offer.findAllAvailables", Offer.class)
+                .getResultList();
+    }
 
     public Part getUploadedFile() {
         return uploadedFile;
@@ -82,6 +85,14 @@ public class OfferService extends AbstractService<Offer> {
 
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
+    }
+
+    public List<Offer> getSearchResults() {
+        return searchResults;
+    }
+
+    public void setSearchResults(List<Offer> searchResults) {
+        this.searchResults = searchResults;
     }
 
 }
