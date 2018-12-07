@@ -19,11 +19,11 @@ public class StartupSeedDatabase {
     
     @PostConstruct
     private void seedDatabase(){
-        Group adminGroup = new Group("ADMINS", "admin of the system");
-        User admin = new User("admin", "admin", true);
-        admin.addGroup(adminGroup);
-        
-        groupSvc.create(adminGroup);
-        userSvc.create(admin);
+//        Group adminGroup = new Group("ADMINS", "admin of the system");
+//        User admin = new User("admin", "admin", true);
+//        admin.addGroup(adminGroup);
+//        
+//        groupSvc.create(adminGroup);
+//        userSvc.create(admin);
     }
 }

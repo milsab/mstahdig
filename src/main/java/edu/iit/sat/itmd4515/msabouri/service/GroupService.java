@@ -29,4 +29,11 @@ public class GroupService extends AbstractService<Group> {
     public List<Group> findAll() {
         return getEntityManager().createNamedQuery("Group.findAll", Group.class).getResultList();
     }  
+    
+    public Group findByGroupName(String groupName){
+        return getEntityManager()
+                .createNamedQuery("Group.findByGroupName", Group.class)
+                .setParameter("groupName", groupName)
+                .getSingleResult();
+    }
 }

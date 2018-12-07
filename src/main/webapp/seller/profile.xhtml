@@ -12,26 +12,26 @@
 
     <ui:define name="content">
         <h:dataTable value="#{sellerController.seller}" 
-                     var="buyer"
+                     var="seller"
                      styleClass="table table-striped table-hover">
             <h:column>
-                <h:outputText value="#{buyer.sellerId}"/>
+                <h:outputText value="#{seller.sellerId}"/>
                 <f:facet name="header"><h:outputText value="ID"/></f:facet>
             </h:column>
             <h:column>
-                <h:outputText value="#{buyer.firstName}"/>
+                <h:outputText value="#{seller.firstName}"/>
                 <f:facet name="header"><h:outputText value="First Name"/></f:facet>
             </h:column>
             <h:column>
-                <h:outputText value="#{buyer.lastName}"/>
+                <h:outputText value="#{seller.lastName}"/>
                 <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
             </h:column>
             <h:column>
-                <h:outputText value="#{buyer.gender}"/>
+                <h:outputText value="#{seller.gender}"/>
                 <f:facet name="header"><h:outputText value="Gender"/></f:facet>
             </h:column>
 <!--            <h:column>
-                <h:outputText value="#{buyer.birthday}"/>
+                <h:outputText value="#{seller.birthday}"/>
                 <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
             </h:column>-->
 

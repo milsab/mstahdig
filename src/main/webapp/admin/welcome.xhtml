@@ -2,7 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/template/portalTemplate.xhtml"
+                template="./../WEB-INF/template/FormsTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
@@ -11,17 +11,55 @@
     </ui:define>
 
     <ui:define name="content">
-        <h2>
+        <h3>
             Welcome Admin "#{loginController.remoteUser}"
-        </h2>
+        </h3>
         <br/>
-        <h3>List of Offers:</h3>
+        <h3>List of Cooks:</h3>
+        <h:dataTable value="#{sellerService.findAll()}" 
+                     var="seller"
+                     styleClass="table table-striped table-hover">
+            <h:column>
+                <h:outputText value="#{seller.sellerId}"/>
+                <f:facet name="header"><h:outputText value="ID"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{seller.firstName}"/>
+                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{seller.lastName}"/>
+                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{seller.birthday}">
+                    <f:convertDateTime type="date" dateStyle="long"/>
+                </h:outputText>
+                <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{seller.gender}"/>
+                <f:facet name="header"><h:outputText value="Gender"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{seller.user.userName}"/>
+                <f:facet name="header"><h:outputText value="Username"/></f:facet>
+            </h:column>
+            
+        </h:dataTable>
+        <br/>
+        
+        <h3>List of Offers BY All Cooks:</h3>
         <h:dataTable value="#{offerService.findAll()}" 
                      var="offer"
                      styleClass="table table-striped table-hover">
             <h:column>
                 <h:outputText value="#{offer.offerId}"/>
                 <f:facet name="header"><h:outputText value="ID"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:graphicImage library="images" name="#{offer.imageFile}" class="offerImageTable"/>
+                <f:facet name="header"><h:outputText value=""/></f:facet>
             </h:column>
             <h:column>
                 <h:outputText value="#{offer.createdDate}">
@@ -39,18 +77,65 @@
             </h:column>
             <h:column>
                 <h:outputText value="#{offer.unitPrice}"/>
-                <f:facet name="header"><h:outputText value="Unit Price"/></f:facet>
-            </h:column>            
+                <f:facet name="header"><h:outputText value="Unit Price ($)"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{offer.seller.firstName}"/>
+                <f:facet name="header"><h:outputText value="Cook"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{offer.seller.user.userName}"/>
+                <f:facet name="header"><h:outputText value="Username"/></f:facet>
+            </h:column>
             
         </h:dataTable>
         <br/>
-        <h3>List of Orders</h3>
+        <hr/>
+        <br/>
+        <h3>List of Customers</h3>
+        <br/>
+        <h:dataTable value="#{buyerService.findAll()}" 
+                     var="buyer"
+                     styleClass="table table-striped table-hover">
+            <h:column>
+                <h:outputText value="#{buyer.buyerId}"/>
+                <f:facet name="header"><h:outputText value="ID"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{buyer.firstName}"/>
+                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{buyer.lastName}"/>
+                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{buyer.birthday}">
+                    <f:convertDateTime type="date" dateStyle="long"/>
+                </h:outputText>
+                <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{buyer.gender}"/>
+                <f:facet name="header"><h:outputText value="Gender"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{buyer.user.userName}"/>
+                <f:facet name="header"><h:outputText value="Username"/></f:facet>
+            </h:column>
+            
+        </h:dataTable>
+        <h3>List of Orders By All Customers</h3>
         <h:dataTable value="#{orderService.findAll()}" 
                      var="order"
                      styleClass="table table-striped table-hover">
             <h:column>
                 <h:outputText value="#{order.orderId}"/>
                 <f:facet name="header"><h:outputText value="ID"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:graphicImage library="images" name="#{order.offer.imageFile}" class="offerImageTable"/>
+                <f:facet name="header"><h:outputText value=""/></f:facet>
             </h:column>
             <h:column>
                 <h:outputText value="#{order.orderDate}">
@@ -61,6 +146,18 @@
             <h:column>
                 <h:outputText value="#{order.offer.title}"/>
                 <f:facet name="header"><h:outputText value="Title"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{order.quantity}"/>
+                <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{order.price}"/>
+                <f:facet name="header"><h:outputText value="Total Price ($)"/></f:facet>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{order.buyer.firstName}"/>
+                <f:facet name="header"><h:outputText value="Customer"/></f:facet>
             </h:column>
             <h:column>
                 <h:outputText value="#{order.buyer.user.userName}"/>

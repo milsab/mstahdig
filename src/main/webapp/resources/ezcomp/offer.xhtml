@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="offer" rendered="true" type="edu.iit.sat.itmd4515.msabouri.domain.Offer"/>
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerId" value="Offer ID: #{cc.attrs.offer.offerId}"  />
+                <h:inputHidden class="form-control" id="offerId" value="#{cc.attrs.offer.offerId}" />
+                <h:message for="offerId" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerTitle" value="Title" />
+                <h:inputText class="form-control" id="offerTitle" value="#{cc.attrs.offer.title}" />
+                <h:message for="offerTitle" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerDescription" value="Description" />
+                <h:inputTextarea class="form-control" id="offerDescription" value="#{cc.attrs.offer.description}" />
+                <h:message for="offerDescription" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerRecipe" value="Recipe" />
+                <h:inputText class="form-control" id="offerRecipe" value="#{cc.attrs.offer.recipe}" />
+                <h:message for="offerRecipe" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerQuantity" value="Quantity" />
+                <h:inputText class="form-control" id="offerQuantity" value="#{cc.attrs.offer.quantity}" />
+                <h:message for="offerQuantity" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="offerPrice" value="Unit Price ($)" />
+                <h:inputText class="form-control" id="offerPrice" value="#{cc.attrs.offer.unitPrice}" />
+                <h:message for="offerPrice" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:inputHidden class="form-control" id="imageFile" value="#{cc.attrs.offer.imageFile}" />
+            </h:panelGroup>
+            <h:commandButton class="btn btn-primary" action="#{offerService.update(cc.attrs.offer, loginController.remoteUser)}" value="Save Changes" />
+        </h:form>
+    </cc:implementation>
+</html>

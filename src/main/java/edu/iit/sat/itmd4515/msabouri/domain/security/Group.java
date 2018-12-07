@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -19,7 +20,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sec_group")
-@NamedQuery(name = "Group.findAll", query = "select g from Group g")
+@NamedQueries({
+    @NamedQuery(name = "Group.findAll", query = "select g from Group g"),
+    @NamedQuery(name = "Group.findByGroupName", query = "select g from Group g where g.groupName = :groupName")
+})
 public class Group {
 
     @Id
