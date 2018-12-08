@@ -49,4 +49,9 @@ public class SellerController  extends AbstractController{
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+    
+    public String doEdit(Seller seller) {
+        this.seller = seller;        
+        return "/seller/editProfile.xhtml";
+    }
 }

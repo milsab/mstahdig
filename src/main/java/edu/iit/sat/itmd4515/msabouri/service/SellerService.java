@@ -39,4 +39,9 @@ public class SellerService extends AbstractService<Seller> {
     public Seller findIdByUserName(String username){
         return getEntityManager().createNamedQuery("Seller.findIdByUsername", Seller.class).setParameter("username", username).getSingleResult();
     }
+    
+    public String executeEdit(Seller seller){
+        super.update(seller);
+        return "/seller/profile.xhtml?faces-redirect=true";
+    }
 }

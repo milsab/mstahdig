@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/template/FormsTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        Edit Profile
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="buyerId" value="Cook ID: #{sellerController.seller.sellerId}"  />
+                <h:inputHidden class="form-control" id="buyerId" 
+                               value="#{sellerController.seller.sellerId}" />
+                <h:message for="buyerId" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="firstName" value="First Name" />
+                <h:inputText class="form-control" id="firstName" 
+                             value="#{sellerController.seller.firstName}" />
+                <h:message for="firstName" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="lastName" value="Last Name" />
+                <h:inputText class="form-control" id="lastName" 
+                             value="#{sellerController.seller.lastName}" />
+                <h:message for="lastName" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="birthday" value="Birthday" />
+                <h:inputText value="#{sellerController.seller.birthday}" 
+                             class="form-control" p:placeholder="Birthday"
+                             p:type="date" id="birthday" title="Birthady">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
+                <h:message for="birthday" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="gender" value="Gender" />
+                <h:selectOneMenu value="#{sellerController.seller.gender}" class="form-control" id="gender">
+                    <f:selectItem itemValue="male" itemLabel="Male" />
+                    <f:selectItem itemValue="female" itemLabel="Female" />
+                </h:selectOneMenu>
+                <h:message for="gender" errorClass="text-danger" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="email" value="Email" />
+                <h:inputText class="form-control" id="email" 
+                             value="#{sellerController.seller.email}"
+                             p:type="email"/>
+                <h:message for="email" errorClass="text-danger" />
+            </h:panelGroup>            
+            <h:commandButton class="btn btn-primary" 
+                             action="#{sellerService.executeEdit(sellerController.seller)}" 
+                             value="Save Changes" />
+            <h:link class="btn btn-link" outcome="/seller/profile.xhtml" value="Cancel"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

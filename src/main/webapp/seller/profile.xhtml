@@ -11,37 +11,43 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:dataTable value="#{sellerController.seller}" 
-                     var="seller"
-                     styleClass="table table-striped table-hover">
-            <h:column>
-                <h:outputText value="#{seller.sellerId}"/>
-                <f:facet name="header"><h:outputText value="ID"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{seller.firstName}"/>
-                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{seller.lastName}"/>
-                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{seller.gender}"/>
-                <f:facet name="header"><h:outputText value="Gender"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{seller.birthday}">
-                    <f:convertDateTime type="date" dateStyle="long"/>
-                </h:outputText>
-                <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{seller.email}"/>
-                <f:facet name="header"><h:outputText value="Email"/></f:facet>
-            </h:column>
-
-        </h:dataTable>
+        <h:form>
+            <h:dataTable value="#{sellerController.seller}" 
+                         var="seller"
+                         styleClass="table table-striped table-hover">
+                <h:column>
+                    <h:outputText value="#{seller.sellerId}"/>
+                    <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{seller.firstName}"/>
+                    <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{seller.lastName}"/>
+                    <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{seller.gender}"/>
+                    <f:facet name="header"><h:outputText value="Gender"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{seller.birthday}">
+                        <f:convertDateTime type="date" dateStyle="long"/>
+                    </h:outputText>
+                    <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{seller.email}"/>
+                    <f:facet name="header"><h:outputText value="Email"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:commandLink action="#{sellerController.doEdit(seller)}">
+                        <h:graphicImage library="images" name="edit.png" class="iconImages" title="Edit Profile"/>
+                    </h:commandLink>                                                           
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 
 </ui:composition>
