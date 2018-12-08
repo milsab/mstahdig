@@ -22,6 +22,6 @@ public class RESTOfferService {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getMessage(){
-        return "Milad, The Great!";
+        return "Milad";
     }
 }

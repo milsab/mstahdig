@@ -84,7 +84,6 @@ public class RegisterController extends AbstractController {
         Thread th = new Thread(emailSvc);
         LOG.info("Starting a new thread to send the email..");
         th.start();
-        LOG.info("The email was sent successfully");
     }
 
     public String getUsername() {
