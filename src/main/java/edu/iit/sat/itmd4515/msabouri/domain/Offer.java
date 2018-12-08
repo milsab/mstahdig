@@ -25,6 +25,9 @@ import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
 /**
@@ -60,17 +63,21 @@ public class Offer {
     @Column(name = "offer_id")
     private Long offerId;
 
+    @NotBlank(message = "You must enter the Title")
     private String title;
+    @NotBlank(message = "You must enter the Description")
     private String description;
 
     @Temporal(TemporalType.DATE)
     @PastOrPresent
     private Date createdDate;
 
+    @NotNull(message = "You must enter the Price")
     @DecimalMax("1000.00")
     @DecimalMin("0.00")
     private BigDecimal unitPrice;
 
+    @NotNull(message = "You must enter the Quantity")
     @Min(0)
     private Integer quantity;
 
@@ -87,6 +94,7 @@ public class Offer {
     
     
     private String recipe;
+    
     
     @Column(name = "image_file")
     private String imageFile;

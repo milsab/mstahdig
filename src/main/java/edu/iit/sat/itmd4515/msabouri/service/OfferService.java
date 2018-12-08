@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -23,7 +24,7 @@ public class OfferService extends AbstractService<Offer> {
     private Part uploadedFile;
 
     private List<Offer> searchResults;
-    
+
     public OfferService() {
         super(Offer.class);
     }
@@ -38,18 +39,23 @@ public class OfferService extends AbstractService<Offer> {
     public String create(Offer offer, String username) {
         Seller seller = sellerSvc.findByUserName(username);
         offer.setSeller(seller);
-        String imageName = uploadedFile.getSubmittedFileName();
-        offer.setImageFile(imageName);
+        if (uploadedFile != null) {
+            String imageName = uploadedFile.getSubmittedFileName();
+            offer.setImageFile(imageName);
+        }
         super.create(offer);
 
-        String filename = Long.toString(offer.getOfferId());
-        FileUploadController imageFile = new FileUploadController();
-        imageFile.setUploadedFile(uploadedFile);
-        imageFile.saveFile(filename);
+        if (uploadedFile != null) {
+            String filename = Long.toString(offer.getOfferId());
+            FileUploadController imageFile = new FileUploadController();
+            imageFile.setUploadedFile(uploadedFile);
+            imageFile.saveFile(filename);
+        }
+
         return "/seller/offer?faces-redirect=true";
     }
-    
-    public String update(Offer offer, String username){
+
+    public String update(Offer offer, String username) {
         Seller seller = sellerSvc.findByUserName(username);
         offer.setSeller(seller);
         super.update(offer);
@@ -62,18 +68,18 @@ public class OfferService extends AbstractService<Offer> {
                 .createNamedQuery("Offer.findAll", Offer.class)
                 .getResultList();
     }
-    
-    public String findAllBySearch(String keyword){
-        
-         searchResults = getEntityManager()
+
+    public String findAllBySearch(String keyword) {
+
+        searchResults = getEntityManager()
                 .createNamedQuery("Offer.findBySearch", Offer.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
-         return "/buyer/searchResults";
-                
+        return "/buyer/searchResults";
+
     }
-    
-    public List<Offer> findAllAvailables(){
+
+    public List<Offer> findAllAvailables() {
         return getEntityManager()
                 .createNamedQuery("Offer.findAllAvailables", Offer.class)
                 .getResultList();
