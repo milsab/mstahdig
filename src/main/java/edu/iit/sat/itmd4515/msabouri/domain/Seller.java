@@ -54,6 +54,8 @@ public class Seller {
     private String gender;
     @Temporal(TemporalType.DATE)
     private Date birthday;
+    
+    private String email;
 
 
     @OneToMany(mappedBy = "seller")
@@ -69,11 +71,12 @@ public class Seller {
     public Seller() {
     }
 
-    public Seller(String firstName, String lastName, String gender, Date birthday) {
+    public Seller(String firstName, String lastName, String gender, Date birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthday = birthday;
+        this.email = email;
     }
 
     /**
@@ -194,6 +197,14 @@ public class Seller {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

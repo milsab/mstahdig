@@ -34,7 +34,7 @@ public class SellerTest extends AbstractJPATest{
     @Test
     public void persitenceSellerTest(){
         Seller seller = new Seller("Milad", "Sabouri", "M", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
 
         Food food = new Food("abc", "abc description", 
                 Arrays.asList("Oil", "Bread", "Milk"), 
@@ -59,7 +59,7 @@ public class SellerTest extends AbstractJPATest{
     @Test
     public void FirstNameIsBlank(){
         Seller seller = new Seller(" ", "abc", "mail", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
         System.out.println(seller.toString());
         
         Set<ConstraintViolation<Seller>> constraintViolations = validator.validate(seller);
@@ -74,7 +74,7 @@ public class SellerTest extends AbstractJPATest{
     @Test
     public void LastNameIsBlank(){
         Seller seller = new Seller("abc", " ", "mail", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
         System.out.println(seller.toString());
         
         Set<ConstraintViolation<Seller>> constraintViolations = validator.validate(seller);

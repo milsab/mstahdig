@@ -17,10 +17,10 @@ insert ignore into sec_user_groups(username, groupname) values('seller2','SELLER
 insert ignore into sec_user_groups(username, groupname) values('milad','SELLER');
 insert ignore into sec_user_groups(username, groupname) values('admin','ADMINS');
 
-insert into BUYER(buyerid, birthday, firstname, lastname, gender, username) values(1, '1970-09-01', 'Alex', 'Wooden', 'male', 'buyer1');
-insert into BUYER(buyerid, birthday, firstname, lastname, gender, username) values(2, '1980-09-01', 'Jack', 'Smith', 'male', 'buyer2');
-insert into SELLER(sellerid, birthday, firstname, lastname, gender, username) values(1, '1970-09-01', 'Chris', 'Hamilton', 'male', 'seller1');
-insert into SELLER(sellerid, birthday, firstname, lastname, gender, username) values(2, '1980-09-01', 'Richard', 'Rex', 'male', 'seller2');
+insert into BUYER(buyerid, birthday, firstname, lastname, gender, username, email) values(1, '1970-09-01', 'Alex', 'Wooden', 'male', 'buyer1', 'alex.wooden@example.com');
+insert into BUYER(buyerid, birthday, firstname, lastname, gender, username, email) values(2, '1980-09-01', 'Jack', 'Smith', 'male', 'buyer2', 'jack.smith@example.com');
+insert into SELLER(sellerid, birthday, firstname, lastname, gender, username, email) values(1, '1970-09-01', 'Chris', 'Hamilton', 'male', 'seller1', 'chris.hamilton@example.com');
+insert into SELLER(sellerid, birthday, firstname, lastname, gender, username, email) values(2, '1980-09-01', 'Richard', 'Rex', 'male', 'seller2', 'rich.rex@example.com');
 
 insert into FOOD(id, date_cooked, description, name, seller_id) values(1, '2018-11-01', 'includes meat', 'Meat Ball', 1);
 insert into FOOD(id, date_cooked, description, name, seller_id) values(2, '2018-11-02', 'includes Vegi', 'Vegi Burger', 1);

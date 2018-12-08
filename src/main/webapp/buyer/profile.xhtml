@@ -11,33 +11,46 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:dataTable value="#{buyerController.buyer}" 
-                     var="buyer"
-                     styleClass="table table-striped table-hover">
-            <h:column>
-                <h:outputText value="#{buyer.buyerId}"/>
-                <f:facet name="header"><h:outputText value="ID"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{buyer.firstName}"/>
-                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{buyer.lastName}"/>
-                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{buyer.gender}"/>
-                <f:facet name="header"><h:outputText value="Gender"/></f:facet>
-            </h:column>
-            <h:column>
-                <h:outputText value="#{buyer.birthday}">
-                    <f:convertDateTime type="date" dateStyle="long"/>
-                </h:outputText>
-                <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
-            </h:column>
+        <h:form>
 
-        </h:dataTable>
+
+            <h:dataTable value="#{buyerController.buyer}" 
+                         var="buyer"
+                         styleClass="table table-striped table-hover">
+                <h:column>
+                    <h:outputText value="#{buyer.buyerId}"/>
+                    <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{buyer.firstName}"/>
+                    <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{buyer.lastName}"/>
+                    <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{buyer.gender}"/>
+                    <f:facet name="header"><h:outputText value="Gender"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{buyer.birthday}">
+                        <f:convertDateTime type="date" dateStyle="long"/>
+                    </h:outputText>
+                    <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{buyer.email}"/>
+                    <f:facet name="header"><h:outputText value="Email"/></f:facet>
+                </h:column>
+                <h:column>
+                    <h:commandLink action="#{buyerController.doEdit(buyer)}">
+                        <h:graphicImage library="images" name="edit.png" class="iconImages" title="Edit Profile"/>
+                    </h:commandLink>                                                           
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
     </ui:define>
 
 </ui:composition>

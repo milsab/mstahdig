@@ -85,6 +85,13 @@ public class BuyerController extends AbstractController implements Serializable 
         }
 
     }
+    
+    public String doEdit(Buyer buyer) {
+        this.buyer = buyer;        
+        return "/buyer/editProfile.xhtml";
+    }
+    
+    
 
     /**
      * Get the value of buyer

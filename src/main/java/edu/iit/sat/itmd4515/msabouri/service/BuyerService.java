@@ -36,4 +36,9 @@ public class BuyerService extends AbstractService<Buyer> {
         return getEntityManager().createNamedQuery("Buyer.findByUsername", Buyer.class).setParameter("username", username).getSingleResult();
     }
     
+    public String executeEdit(Buyer buyer){
+        super.update(buyer);
+        return "/buyer/profile.xhtml?faces-redirect=true";
+    }
+    
 }

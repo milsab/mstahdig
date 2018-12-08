@@ -39,6 +39,7 @@ public class RegisterController extends AbstractController {
     
     private Date birthday;
     
+    
     @NotBlank(message = "You must enter your Email")
     private String email;
     private String gender;
@@ -65,11 +66,11 @@ public class RegisterController extends AbstractController {
         userSvc.create(newUser);
         
         if(group.getGroupName().equals("BUYER")){
-            Buyer buyer = new Buyer(firstName, lastName, gender, birthday);
+            Buyer buyer = new Buyer(firstName, lastName, gender, birthday, email);
             buyer.setUser(newUser);
             buyerSvc.create(buyer);
         } else if (group.getGroupName().equals("SELLER")){
-            Seller seller = new Seller(firstName, lastName, gender, birthday);
+            Seller seller = new Seller(firstName, lastName, gender, birthday, email);
             seller.setUser(newUser);
             sellerService.create(seller);
         }

@@ -35,7 +35,7 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void persitenceSellerTest(){
         Buyer buyer = new Buyer("Nas", "Gha", "F", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
 
         OrderFood order = new OrderFood(
                 new GregorianCalendar(2017, 9, 23).getTime(), 2, new BigDecimal("20.00"));
@@ -59,7 +59,7 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void FirstNameIsBlank(){
         Buyer buyer = new Buyer(" ", "abc", "mail", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);
@@ -74,7 +74,7 @@ public class BuyerTest extends AbstractJPATest{
     @Test
     public void LastNameIsBlank(){
         Buyer buyer = new Buyer("abc", " ", "mail", 
-                new GregorianCalendar(2017, 9, 23).getTime());
+                new GregorianCalendar(2017, 9, 23).getTime(), "");
         System.out.println(buyer.toString());
         
         Set<ConstraintViolation<Buyer>> constraintViolations = validator.validate(buyer);

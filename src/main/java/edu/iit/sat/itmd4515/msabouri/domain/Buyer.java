@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.iit.sat.itmd4515.msabouri.domain;
 
 import edu.iit.sat.itmd4515.msabouri.domain.security.User;
@@ -52,6 +47,8 @@ public class Buyer {
     @Temporal(TemporalType.DATE)
     private Date birthday;
     
+    private String email;
+    
 
     @OneToMany(mappedBy = "buyer")
     private List<OrderFood> orders = new ArrayList<>();
@@ -63,11 +60,12 @@ public class Buyer {
     public Buyer() {
     }
 
-    public Buyer(String firstName, String lastName, String gender, Date birthday) {
+    public Buyer(String firstName, String lastName, String gender, Date birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthday = birthday;
+        this.email = email;
     }
     
     /**
@@ -180,5 +178,13 @@ public class Buyer {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
