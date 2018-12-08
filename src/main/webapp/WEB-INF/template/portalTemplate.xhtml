@@ -45,7 +45,7 @@
                         <li class="#{fn:startsWith(view.viewId, '/buyer/order.xhtml') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/buyer/order.xhtml" value="My Orders"/>
                         </li>
-                        <li class="#{fn:startsWith(view.viewId, '/profile') ? 'nav-item active': 'nav-item'}">
+                        <li class="#{fn:startsWith(view.viewId, 'buyer/profile') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/buyer/profile.xhtml" value="My Profile"/>
                         </li>
                     </ui:fragment>
@@ -60,8 +60,11 @@
                     </ui:fragment>
 
                     <ui:fragment rendered="#{loginController.admin}" class="uiFragment">
-                        <li class="#{fn:startsWith(view.viewId, '/admin') ? 'nav-item active': 'nav-item'}">
+                        <li class="#{fn:startsWith(view.viewId, '/admin/welcome') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/admin/welcome.xhtml" value="Admin Page"/>
+                        </li>
+                        <li class="#{fn:startsWith(view.viewId, '/admin/sendMessage') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/admin/sendMessage.xhtml" value="Send Message"/>
                         </li>
                     </ui:fragment>
 

@@ -30,7 +30,6 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(edu.iit.sat.itmd4515.msabouri.service.RESTEmailService.class);
-        resources.add(edu.iit.sat.itmd4515.msabouri.service.RESTOfferService.class);
     }
     
 }

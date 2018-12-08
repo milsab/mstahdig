@@ -1,14 +1,11 @@
 package edu.iit.sat.itmd4515.msabouri.service;
 
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -25,12 +22,6 @@ public class RESTEmailService {
     
     
     EmailService emailSvc;
-    
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getMessage(){
-        return "Milad";               
-    }
     
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

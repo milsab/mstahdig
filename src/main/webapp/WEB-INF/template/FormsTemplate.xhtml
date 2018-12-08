@@ -39,33 +39,36 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="#{fn:startsWith(view.viewId, '/welcome') ? 'nav-item active': 'nav-item'}">
                         <h:link class="nav-link" outcome="/welcome.xhtml" value="Home"/>
                     </li>
 
                     <ui:fragment rendered="#{loginController.buyer}" class="uiFragment">
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/buyer/order') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/buyer/order.xhtml" value="My Orders"/>
                         </li>
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/buyer/profile') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/buyer/profile.xhtml" value="My Profile"/>
                         </li>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{loginController.seller}" class="uiFragment">                        
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/seller/offer') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/seller/offer.xhtml" value="My Offers"/>
                         </li>
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/seller/profile') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/seller/profile.xhtml" value="My Profile"/>
                         </li>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{loginController.admin}" class="uiFragment">
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/admin/welcome') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/admin/welcome.xhtml" value="Admin Page"/>
                         </li>
-                        <li class="nav-item">
+                        <li class="#{fn:startsWith(view.viewId, '/admin/sendMessage') ? 'nav-item active': 'nav-item'}">
+                            <h:link class="nav-link" outcome="/admin/sendMessage.xhtml" value="Send Message"/>
+                        </li>
+                        <li class="#{fn:startsWith(view.viewId, '/admin/site/') ? 'nav-item active': 'nav-item'}">
                             <h:link class="nav-link" outcome="/admin/site/apidocs/index.html" value="API DOCS" target="_blank"/>
                         </li>
                     </ui:fragment>
