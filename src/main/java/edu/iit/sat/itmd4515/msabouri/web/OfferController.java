@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.iit.sat.itmd4515.msabouri.web;
 
 import edu.iit.sat.itmd4515.msabouri.domain.Offer;
@@ -23,39 +18,47 @@ import javax.inject.Named;
 public class OfferController {
 
     private static final Logger LOG = Logger.getLogger(OfferController.class.getName());
-    
+
     private Offer offer;
-    
+
     private Seller seller;
-    
+
     @EJB
     private OfferService offerSvc;
-    
+
     @PostConstruct
-    private void postConstruct(){
+    private void postConstruct() {
         LOG.info("Inside OfferController postConstructor");
-        
+
         offer = new Offer();
-        
+
     }
-    
+
     public String executeSaveOffer() {
         LOG.info("Inside OfferController executeSaveOffer");
         this.offer = offer;
         this.offer.setSeller(seller);
         offerSvc.update(this.offer);
-        return "/seller/offer.xhtml";  
+        return "/seller/offer.xhtml";
     }
-    
-    public String doEdit(Offer offer){
+
+    public String doEdit(Offer offer) {
         this.offer = offer;
         this.seller = offer.getSeller();
-//        offerSvc.remove(offer);
-        return "/seller/editOffer.xhtml";  
+        return "/seller/editOffer.xhtml";
     }
-    
-    public String doUpdate(Offer offer){
-        return "/seller/offer.xhtml";  
+
+    public String doRemove(Offer offer) {
+        this.offer = offer;
+        if (offerSvc.remove(offer) == null) {
+            return "/seller/offer.xhtml?faces-redirect=true";
+        } else {
+            return "/seller/deleteOffer.xhtml?faces-redirect=true";
+        }
+    }
+
+    public String doUpdate(Offer offer) {
+        return "/seller/offer.xhtml";
     }
 
     /**

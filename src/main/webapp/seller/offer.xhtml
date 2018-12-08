@@ -4,10 +4,17 @@
                 template="./../WEB-INF/template/FormsTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:pf="http://primefaces.org/ui">
 
     <ui:define name="title">
         My Offers
+
+        <span>
+            <h:link outcome="/seller/addOffer.xhtml" title="Add New Offer">
+                <h:graphicImage library="images" name="add.png" class="iconImagesAdd"/>
+            </h:link>            
+        </span>        
     </ui:define>
 
 
@@ -47,7 +54,22 @@
                     <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
                 </h:column>                
                 <h:column>
-                    <h:commandLink action="#{offerController.doEdit(offer)}" value="Edit" class="btn btn-success"/>                                
+                    <h:commandLink action="#{offerController.doEdit(offer)}">
+                        <h:graphicImage library="images" name="edit.png" class="iconImages" title="Edit"/>
+                    </h:commandLink>                    
+                    <span>&nbsp;&nbsp;&nbsp;</span>                    
+                    <pf:growl id="message" showDetail="true" />                    
+                    <pf:commandLink action="#{offerController.doRemove(offer)}">
+                        <h:graphicImage library="images" name="delete.png" class="iconImages" title="Delete" />
+                        <pf:confirm header="Confirmation" 
+                                    message="You are going to DELETE the offer! Are you sure?" 
+                                    icon="pi pi-exclamation-triangle" 
+                                    />
+                    </pf:commandLink>
+                    <pf:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <pf:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <pf:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </pf:confirmDialog>                                        
                 </h:column>
 
             </h:dataTable>

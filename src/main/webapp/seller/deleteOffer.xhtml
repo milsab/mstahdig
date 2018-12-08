@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/template/FormsTemplate.xhtml"
+                xmlns:pf="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+        <span>
+            <h:graphicImage library="images" name="failure.png" class="iconImagesBig"/>
+        </span>Your Request Cannot Be Done!
+        <hr/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p class="alert alert-warning">The offer you selected to delete has related order(s), so it cannot be deleted!</p>
+        <h:form>            
+            <h:link class="btn btn-link" outcome="/welcome.xhtml" value="Back to Home"/>
+            <h:link class="btn btn-link" outcome="/seller/offer.xhtml" value="Back to My Offers"/>
+        </h:form>        
+    </ui:define>
+
+</ui:composition>

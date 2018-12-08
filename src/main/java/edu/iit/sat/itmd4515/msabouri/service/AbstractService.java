@@ -15,38 +15,43 @@ import javax.persistence.PersistenceContext;
  * @author Milad
  */
 public abstract class AbstractService<T> {
-    
+
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
-    
+
     private final Class<T> entityClass;
 
     public AbstractService(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-    
-    
-    
+
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     public void create(T entity) {
         em.persist(entity);
         em.flush();
     }
-    
-    public void update(T entity){
+
+    public void update(T entity) {
         em.merge(entity);
     }
-    
-    public void remove(T entity){
-        em.remove(em.merge(entity));
+
+    public String remove(T entity) {
+        try {
+            em.remove(em.merge(entity));
+            em.flush();
+            return null;
+        } catch (Exception exception){
+            return exception.getMessage();
+        }
+
     }
-    
-    public T findById(Object id){
+
+    public T findById(Object id) {
         return em.find(entityClass, id);
     }
-    
+
     public abstract List<T> findAll();
 }

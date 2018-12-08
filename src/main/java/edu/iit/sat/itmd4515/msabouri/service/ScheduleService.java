@@ -3,7 +3,6 @@ package edu.iit.sat.itmd4515.msabouri.service;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.ejb.Schedule;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
 
 /**

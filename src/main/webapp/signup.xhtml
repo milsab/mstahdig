@@ -5,7 +5,9 @@
                 template="./WEB-INF/template/loginTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pf="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
     <ui:define name="title">
         Register
@@ -26,7 +28,19 @@
             <h:inputText value="#{registerController.lastName}" id="lname" 
                          class="form-control" p:placeholder="Last Name" 
                          p:autofocus="autofocus" />
-            <h:message for="lname" errorClass="text-danger"/>             
+            <h:message for="lname" errorClass="text-danger"/> 
+
+<!--            <h:panelGroup layout="block" class="form-group">
+                <h:inputText value="#{registerController.birthday}" class="form-control" p:type="date" id="birthday">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
+            </h:panelGroup>-->
+
+            <h:inputText value="#{registerController.birthday}" 
+                         class="form-control" p:placeholder="Birthday"
+                         p:type="date" id="birthday" title="Birthady">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:inputText>
 
             <h:outputLabel for="gender" class="sr-only" value="Gender"/>
             <h:selectOneMenu value="#{registerController.gender}" class="form-control" id="gender">

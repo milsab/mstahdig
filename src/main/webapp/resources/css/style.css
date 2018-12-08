@@ -82,3 +82,34 @@ body {
 .headerBeyondNavBar{
     margin-top: 100px;
 }
+
+.iconImages{
+    height: 30px;
+    width: 30px;
+    margin: 0;
+}
+
+.iconImages:hover {
+    padding:5px;
+    border: 1px solid grey;
+    border-radius: 50px;
+
+}
+
+.iconImagesBig{
+    height: 40px;
+    width: 40px;
+    margin: 0;
+}
+
+.iconImagesAdd{
+    height: 40px;
+    width: 40px;
+    margin-right: 50px;
+    float: right;
+}
+
+.iconImagesAdd:hover{
+    box-shadow: 1px 3px #888888;
+    border-radius: 20px;
+}

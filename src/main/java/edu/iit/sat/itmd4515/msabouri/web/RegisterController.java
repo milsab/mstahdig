@@ -9,6 +9,7 @@ import edu.iit.sat.itmd4515.msabouri.service.EmailService;
 import edu.iit.sat.itmd4515.msabouri.service.GroupService;
 import edu.iit.sat.itmd4515.msabouri.service.SellerService;
 import edu.iit.sat.itmd4515.msabouri.service.UserService;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -35,7 +36,8 @@ public class RegisterController extends AbstractController {
     @NotBlank(message = "You must enter your Last Name")
     private String lastName;
     
-    private String birthday;
+    
+    private Date birthday;
     
     @NotBlank(message = "You must enter your Email")
     private String email;
@@ -63,11 +65,11 @@ public class RegisterController extends AbstractController {
         userSvc.create(newUser);
         
         if(group.getGroupName().equals("BUYER")){
-            Buyer buyer = new Buyer(firstName, lastName, gender, null);
+            Buyer buyer = new Buyer(firstName, lastName, gender, birthday);
             buyer.setUser(newUser);
             buyerSvc.create(buyer);
         } else if (group.getGroupName().equals("SELLER")){
-            Seller seller = new Seller(firstName, lastName, gender, null);
+            Seller seller = new Seller(firstName, lastName, gender, birthday);
             seller.setUser(newUser);
             sellerService.create(seller);
         }
@@ -108,11 +110,11 @@ public class RegisterController extends AbstractController {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

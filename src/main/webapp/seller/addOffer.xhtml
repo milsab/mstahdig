@@ -50,10 +50,10 @@
 
             <br/>
             <h:commandButton action="#{offerService.create(offerController.offer, loginController.remoteUser)}"                             
-                             class="btn btn-primary btn-lg btn-block" 
+                             class="btn btn-primary " 
                              value="Submit" >                
             </h:commandButton>
-
+            <h:link class="btn btn-link" outcome="/seller/offer.xhtml" value="Cancel"/>
         </h:form>
     </ui:define>
 

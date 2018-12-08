@@ -30,10 +30,12 @@
                 <h:outputText value="#{seller.gender}"/>
                 <f:facet name="header"><h:outputText value="Gender"/></f:facet>
             </h:column>
-<!--            <h:column>
-                <h:outputText value="#{seller.birthday}"/>
+            <h:column>
+                <h:outputText value="#{seller.birthday}">
+                    <f:convertDateTime type="date" dateStyle="long"/>
+                </h:outputText>
                 <f:facet name="header"><h:outputText value="Birthday"/></f:facet>
-            </h:column>-->
+            </h:column>
 
         </h:dataTable>
     </ui:define>

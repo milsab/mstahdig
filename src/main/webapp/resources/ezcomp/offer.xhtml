@@ -50,6 +50,7 @@
                 <h:inputHidden class="form-control" id="imageFile" value="#{cc.attrs.offer.imageFile}" />
             </h:panelGroup>
             <h:commandButton class="btn btn-primary" action="#{offerService.update(cc.attrs.offer, loginController.remoteUser)}" value="Save Changes" />
+            <h:link class="btn btn-link" outcome="/seller/offer.xhtml" value="Cancel"/>
         </h:form>
     </cc:implementation>
 </html>

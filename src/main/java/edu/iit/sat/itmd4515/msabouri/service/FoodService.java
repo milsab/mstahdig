@@ -45,14 +45,6 @@ public class FoodService extends AbstractService<Food> {
     }
 
     /**
-     *
-     * @param food the food that you want to remove
-     */
-    public void remove(Food food) {
-        em.remove(em.merge(food));
-    }
-
-    /**
      * Find the food by id
      *
      * @param id the id for the food
