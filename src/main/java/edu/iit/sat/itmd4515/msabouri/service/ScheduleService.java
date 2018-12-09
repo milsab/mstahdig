@@ -36,7 +36,7 @@ public class ScheduleService {
      * Send the total number of orders, offers, cooks, and customers
      * to the admin email every midnights at 00:15:01 a.m.
      */
-    @Schedule(second = "50", minute = "07", hour = "19")
+    @Schedule(second = "01", minute = "15", hour = "00")
     public void sendEmail() {
         EmailService emailSvc = new EmailService(
                 "milad.sabouri@gmail.com",
