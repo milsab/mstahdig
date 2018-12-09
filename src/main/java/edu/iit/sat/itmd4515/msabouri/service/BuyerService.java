@@ -48,6 +48,10 @@ public class BuyerService extends AbstractService<Buyer> {
         return getEntityManager().createNamedQuery("Buyer.findByUsername", Buyer.class).setParameter("username", username).getSingleResult();
     }
     
+    /**
+     *
+     * @return
+     */
     public Long findTotalCustomers(){
         return  (Long) getEntityManager().createNamedQuery("Buyer.findTotalCustomers").getSingleResult();        
     }

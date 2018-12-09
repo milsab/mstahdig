@@ -50,21 +50,37 @@ public class ScheduleService {
         th.start();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTotalOffers() {
         totalOffer = offerSvc.findTotalOffers();
         return Long.toString(totalOffer);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTotalOrders() {
         totalOrders = orderSvc.findTotalOrders();
         return Long.toString(totalOrders);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTotalCooks() {
         totalCooks = sellerSvc.findTotalCooks();
         return Long.toString(totalCooks);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTotalCustomers() {
         totalCustomers = buyerSvc.findTotalCustomers();
         return Long.toString(totalCustomers);

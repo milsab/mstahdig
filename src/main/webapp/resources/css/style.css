@@ -24,6 +24,12 @@ body {
     height: 400px;
 }
 
+.apiStyle{
+    font-weight: bold;
+    font-size: 1.5em;
+    color: red;
+}
+
 #HomePageTitle1 {
     font-family: 'Pattaya', sans-serif;
     font-size: 6em;

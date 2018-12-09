@@ -108,6 +108,10 @@ public class OfferService extends AbstractService<Offer> {
 
     }
     
+    /**
+     *
+     * @return
+     */
     public Long findTotalOffers(){
         return  (Long) getEntityManager().createNamedQuery("Offer.findTotalOffers").getSingleResult();        
     }

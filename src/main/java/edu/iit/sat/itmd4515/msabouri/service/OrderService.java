@@ -54,6 +54,10 @@ public class OrderService extends AbstractService<OrderFood> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     *
+     * @return
+     */
     public Long findTotalOrders(){
         return  (Long) getEntityManager().createNamedQuery("Order.findTotalOrders").getSingleResult();        
     }
