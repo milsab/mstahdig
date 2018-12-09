@@ -23,6 +23,12 @@ public class RESTEmailService {
     
     EmailService emailSvc;
     
+    /**
+     *
+     * @param msg
+     * @param sub
+     * @param receiver
+     */
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void sendMessage(@FormParam("message") String msg, 

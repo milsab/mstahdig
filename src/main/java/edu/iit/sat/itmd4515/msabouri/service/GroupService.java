@@ -21,15 +21,27 @@ public class GroupService extends AbstractService<Group> {
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
     
+    /**
+     *
+     */
     public GroupService() {
         super(Group.class);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Group> findAll() {
         return getEntityManager().createNamedQuery("Group.findAll", Group.class).getResultList();
     }  
     
+    /**
+     *
+     * @param groupName
+     * @return specified group
+     */
     public Group findByGroupName(String groupName){
         return getEntityManager()
                 .createNamedQuery("Group.findByGroupName", Group.class)

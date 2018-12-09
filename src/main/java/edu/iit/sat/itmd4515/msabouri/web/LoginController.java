@@ -54,10 +54,18 @@ public class LoginController extends AbstractController {
 //    @EJB
 //    private SellerService sellerService;
 
+    /**
+     *
+     */
     public LoginController() {
     }
 
     //action methods
+
+    /**
+     *
+     * @return
+     */
     public String doLogin() {
         try {
             HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -70,6 +78,10 @@ public class LoginController extends AbstractController {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String doLogout() {
         try {
             HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -83,18 +95,35 @@ public class LoginController extends AbstractController {
     }
 
     // helper methods for login process
+
+    /**
+     *
+     * @return
+     */
     public String getRemoteUser() {
         return context.getExternalContext().getRemoteUser();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isBuyer() {
         return context.getExternalContext().isUserInRole("BUYER_ROLE");
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSeller() {
         return context.getExternalContext().isUserInRole("SELLER_ROLE");
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAdmin() {
         return context.getExternalContext().isUserInRole("ADMIN_ROLE");
     }
@@ -135,42 +164,82 @@ public class LoginController extends AbstractController {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     *
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     *
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBirthday() {
         return birthday;
     }
 
+    /**
+     *
+     * @param birthday
+     */
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     *
+     * @param gender
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGroup() {
         return group;
     }
 
+    /**
+     *
+     * @param group
+     */
     public void setGroup(String group) {
         this.group = group;
     }

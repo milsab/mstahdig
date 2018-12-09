@@ -40,7 +40,10 @@ import javax.validation.constraints.NotBlank;
             query = "select s from Seller s where s.user.userName = :username"),
     @NamedQuery(
             name = "Seller.findIdByUsername",
-            query = "select s from Seller s where s.user.userName = :username")
+            query = "select s from Seller s where s.user.userName = :username"),
+    @NamedQuery(
+            name = "Seller.findTotalCooks",
+            query = "SELECT count(s) FROM Seller s ")
 })
 public class Seller {
 
@@ -68,9 +71,20 @@ public class Seller {
     @OneToMany(mappedBy = "seller")
     private List<Offer> offers = new ArrayList<>();
 
+    /**
+     *
+     */
     public Seller() {
     }
 
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param gender
+     * @param birthday
+     * @param email
+     */
     public Seller(String firstName, String lastName, String gender, Date birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -82,6 +96,7 @@ public class Seller {
     /**
      * Helper function to manage both side of one-to-many relationship with
      * Food
+     * @param food
      */
     public void addFood(Food food) {
         if (!this.getFoods().contains(food)) {
@@ -164,10 +179,18 @@ public class Seller {
         this.birthday = birthday;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getSellerId() {
         return sellerId;
     }
 
+    /**
+     *
+     * @param sellerId
+     */
     public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
@@ -177,32 +200,66 @@ public class Seller {
         return "Seller{" + "sellerId=" + sellerId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Food> getFoods() {
         return foods;
     }
 
+    /**
+     *
+     * @param foods
+     */
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
+
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
+
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Offer> getOffers() {
         return offers;
     }
 
+    /**
+     *
+     * @param offers
+     */
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

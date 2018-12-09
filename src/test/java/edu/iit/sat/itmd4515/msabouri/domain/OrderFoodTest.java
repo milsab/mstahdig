@@ -23,18 +23,27 @@ import org.junit.Test;
  */
 public class OrderFoodTest extends AbstractJPATest {
 
+    /**
+     *
+     */
     @Before
     @Override
     public void beforeEachTest() {
         super.beforeEachTest();
     }
 
+    /**
+     *
+     */
     @After
     @Override
     public void afterEachTest() {
         super.afterEachTest();
     }
 
+    /**
+     *
+     */
     @Test
     public void persitenceOrderFoodTest() {
         OrderFood order = new OrderFood(
@@ -70,6 +79,9 @@ public class OrderFoodTest extends AbstractJPATest {
         assertEquals("Offer Title", findOrder.getOffer().getTitle());
     }
   
+    /**
+     *
+     */
     @Test
     public void priceAcceptMinZeroTest() {
         OrderFood order = new OrderFood(
@@ -90,6 +102,9 @@ public class OrderFoodTest extends AbstractJPATest {
         }
     }
     
+    /**
+     *
+     */
     @Test
     public void orderDateMustBePastOrPresentTest() {
         OrderFood order = new OrderFood(

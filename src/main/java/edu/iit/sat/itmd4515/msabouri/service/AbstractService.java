@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author Milad
+ * @param <T>
  */
 public abstract class AbstractService<T> {
 
@@ -21,23 +22,44 @@ public abstract class AbstractService<T> {
 
     private final Class<T> entityClass;
 
+    /**
+     *
+     * @param entityClass
+     */
     public AbstractService(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
+    /**
+     *
+     * @return EntityManager
+     */
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void create(T entity) {
         em.persist(entity);
         em.flush();
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void update(T entity) {
         em.merge(entity);
     }
 
+    /**
+     *
+     * @param entity
+     * @return if successful returns NULL otherwise returns error message
+     */
     public String remove(T entity) {
         try {
             em.remove(em.merge(entity));
@@ -49,9 +71,18 @@ public abstract class AbstractService<T> {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public T findById(Object id) {
         return em.find(entityClass, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public abstract List<T> findAll();
 }

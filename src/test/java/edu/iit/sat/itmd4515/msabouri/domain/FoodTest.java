@@ -22,6 +22,9 @@ import org.junit.Test;
  */
 public class FoodTest extends AbstractJPATest {
 
+    /**
+     *
+     */
     @Before
     @Override
     public void beforeEachTest() {
@@ -37,6 +40,9 @@ public class FoodTest extends AbstractJPATest {
         tx.commit();
     }
 
+    /**
+     *
+     */
     @After
     @Override
     public void afterEachTest() {
@@ -51,6 +57,9 @@ public class FoodTest extends AbstractJPATest {
         super.afterEachTest();
     }
     
+    /**
+     *
+     */
     @Test
     public void verifySeedDataSet() {
         List<Food> seeds = em
@@ -198,6 +207,9 @@ public class FoodTest extends AbstractJPATest {
         
     }
     
+    /**
+     *
+     */
     @Test
     public void nameIsBlank(){
         Food food  = new Food(" ", "description", 
@@ -216,6 +228,9 @@ public class FoodTest extends AbstractJPATest {
         });
     }
     
+    /**
+     *
+     */
     @Test
     public void descriptionIsBlank(){
         Food food  = new Food("title", " ", 
@@ -234,6 +249,9 @@ public class FoodTest extends AbstractJPATest {
         });
     }
     
+    /**
+     *
+     */
     @Test
     public void DateIsNull(){
         Food food  = new Food("title", "description", 
@@ -252,6 +270,9 @@ public class FoodTest extends AbstractJPATest {
         });
     }
     
+    /**
+     *
+     */
     @Test
     public void recipeHasAtLeastOneElement(){
         Food food  = new Food("title", "description", 
@@ -270,6 +291,9 @@ public class FoodTest extends AbstractJPATest {
         });
     }
     
+    /**
+     *
+     */
     @Test
     public void dateCookedMustBePastOrPresent(){
         Food food  = new Food("title", "description", 

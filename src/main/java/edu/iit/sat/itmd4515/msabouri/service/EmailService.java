@@ -23,6 +23,14 @@ public class EmailService implements Runnable {
     private String message = "";
     private String subject = "";
 
+    /**
+     *
+     * @param _to
+     * @param username
+     * @param userpass
+     * @param firstName
+     * @param lastname
+     */
     public EmailService(String _to, String username, String userpass, String firstName, String lastname) {
         this._to = _to;
         this.username = username;
@@ -31,6 +39,12 @@ public class EmailService implements Runnable {
         this.lastName = lastname;
     }
 
+    /**
+     *
+     * @param _to
+     * @param message
+     * @param subject
+     */
     public EmailService(
             String _to,
             String message,
@@ -49,6 +63,10 @@ public class EmailService implements Runnable {
         }
     }
 
+    /**
+     * Use this method when we are going to send the WELCOMMING email to users
+     * after registration
+     */
     public void sendWithDefaultMessage() {
         String _from = "meal.sharingservice@gmail.com";
         String _password = "Ng101840";
@@ -88,6 +106,9 @@ public class EmailService implements Runnable {
         }
     }
 
+    /**
+     * Use this method in admin page. To enable admin to send message.
+     */
     public void send() {
         String _from = "meal.sharingservice@gmail.com";
         String _password = "Ng101840";
@@ -119,42 +140,82 @@ public class EmailService implements Runnable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTo() {
         return _to;
     }
 
+    /**
+     *
+     * @param _to
+     */
     public void setTo(String _to) {
         this._to = _to;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserpass() {
         return userpass;
     }
 
+    /**
+     *
+     * @param userpass
+     */
     public void setUserpass(String userpass) {
         this.userpass = userpass;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     *
+     * @param subject
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }

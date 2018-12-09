@@ -23,19 +23,41 @@ public class BuyerService extends AbstractService<Buyer> {
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
     
+    /**
+     *
+     */
     public BuyerService() {
         super(Buyer.class);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Buyer> findAll() {
         return getEntityManager().createNamedQuery("Buyer.findAll", Buyer.class).getResultList();
     }
     
+    /**
+     *
+     * @param username
+     * @return
+     */
     public Buyer findByUserName(String username){
         return getEntityManager().createNamedQuery("Buyer.findByUsername", Buyer.class).setParameter("username", username).getSingleResult();
     }
     
+    public Long findTotalCustomers(){
+        return  (Long) getEntityManager().createNamedQuery("Buyer.findTotalCustomers").getSingleResult();        
+    }
+    
+    
+    /**
+     *
+     * @param buyer
+     * @return the related JSF page to redirect to it
+     */
     public String executeEdit(Buyer buyer){
         super.update(buyer);
         return "/buyer/profile.xhtml?faces-redirect=true";

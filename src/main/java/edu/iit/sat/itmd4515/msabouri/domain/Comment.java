@@ -39,9 +39,18 @@ public class Comment extends AbstractIdentifiedEntity{
     
     private Comment parent;
     
+    /**
+     *
+     */
     public Comment() {
     }
 
+    /**
+     *
+     * @param title
+     * @param text
+     * @param createdDate
+     */
     public Comment(String title, String text, Date createdDate) {
         this.title = title;
         this.text = text;
@@ -50,6 +59,7 @@ public class Comment extends AbstractIdentifiedEntity{
 
     /**
      * Helper function to manage One-to-many relationship with Comment
+     * @param child
      */
     public void addChild(Comment child){
         if(!this.getChildren().contains(child))
@@ -60,6 +70,7 @@ public class Comment extends AbstractIdentifiedEntity{
     
     /**
      * Helper function to manage many-to-one relationship with Comment
+     * @param parent
      */
     public void addParent(Comment parent){
         if(!this.getParent().equals(parent))
@@ -68,23 +79,50 @@ public class Comment extends AbstractIdentifiedEntity{
             parent.getChildren().add(this);
     }
     
+    /**
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
+
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getText() {
         return text;
     }
+
+    /**
+     *
+     * @param text
+     */
     public void setText(String text) {
         this.text = text;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getCreatedDate() {
         return createdDate;
     }
 
+    /**
+     *
+     * @param createdDate
+     */
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
@@ -94,18 +132,34 @@ public class Comment extends AbstractIdentifiedEntity{
         return "Comment{" + "commentId=" + super.getId() + ", title=" + title + ", text=" + text + ", createdDate=" + createdDate + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Comment> getChildren() {
         return children;
     }
 
+    /**
+     *
+     * @param children
+     */
     public void setChildren(List<Comment> children) {
         this.children = children;
     }
 
+    /**
+     *
+     * @return
+     */
     public Comment getParent() {
         return parent;
     }
 
+    /**
+     *
+     * @param parent
+     */
     public void setParent(Comment parent) {
         this.parent = parent;
     }

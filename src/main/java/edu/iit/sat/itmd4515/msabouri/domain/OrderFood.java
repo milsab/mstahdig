@@ -37,7 +37,10 @@ import javax.validation.constraints.PastOrPresent;
             query = "select o from OrderFood o"),   
     @NamedQuery(
             name = "Order.findByUsername",
-            query = "select o from OrderFood o where o.buyer.user.userName = :username")
+            query = "select o from OrderFood o where o.buyer.user.userName = :username"),
+    @NamedQuery(
+            name = "Order.findTotalOrders",
+            query = "SELECT count(o) FROM OrderFood o ")
 })
 @Table(name = "ORDER_FOOD")
 public class OrderFood {
@@ -70,9 +73,18 @@ public class OrderFood {
     @JoinColumn(name = "buyer_id")
     private Buyer buyer;
 
+    /**
+     *
+     */
     public OrderFood() {
     }
 
+    /**
+     *
+     * @param orderDate
+     * @param quantity
+     * @param price
+     */
     public OrderFood(Date orderDate, Integer quantity, BigDecimal price) {
         this.orderDate = orderDate;
         this.quantity = quantity;
@@ -82,6 +94,7 @@ public class OrderFood {
     /**
      * Helper function to manage both side of many-to-one relationship with
      * Offer
+     * @param offer
      */
     public void addOffer(Offer offer) {
         if (!this.getOffer().equals(offer)) {
@@ -95,6 +108,7 @@ public class OrderFood {
     /**
      * Helper function to manage both side of many-to-one relationship with
      * Buyer
+     * @param buyer
      */
     public void addBuyer(Buyer buyer) {
         if (!this.getBuyer().equals(buyer)) {
@@ -123,26 +137,50 @@ public class OrderFood {
         this.orderId = orderId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getOrderDate() {
         return orderDate;
     }
 
+    /**
+     *
+     * @param orderDate
+     */
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getQuantity() {
         return quantity;
     }
 
+    /**
+     *
+     * @param quantity
+     */
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     *
+     * @return
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
@@ -152,18 +190,34 @@ public class OrderFood {
         return "OrderFood{" + "orderId=" + orderId + ", orderDate=" + orderDate + ", quantity=" + quantity + ", price=" + price + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public Offer getOffer() {
         return offer;
     }
 
+    /**
+     *
+     * @param offer
+     */
     public void setOffer(Offer offer) {
         this.offer = offer;
     }
 
+    /**
+     *
+     * @return
+     */
     public Buyer getBuyer() {
         return buyer;
     }
 
+    /**
+     *
+     * @param buyer
+     */
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
     }

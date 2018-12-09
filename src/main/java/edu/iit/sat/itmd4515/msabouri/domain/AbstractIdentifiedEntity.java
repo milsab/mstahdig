@@ -17,6 +17,9 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class AbstractIdentifiedEntity {
     
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -28,10 +31,18 @@ public class AbstractIdentifiedEntity {
         // Do nothing 
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }

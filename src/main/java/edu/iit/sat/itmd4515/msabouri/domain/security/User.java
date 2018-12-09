@@ -40,9 +40,18 @@ public class User {
     )
     private List<Group> groups = new ArrayList<>();
 
+    /**
+     *
+     */
     public User() {
     }
 
+    /**
+     *
+     * @param userName
+     * @param password
+     * @param enabled
+     */
     public User(String userName, String password, Boolean enabled) {
         this.userName = userName;
         this.password = password;
@@ -56,6 +65,10 @@ public class User {
         this.password = digestPassword;
     }
 
+    /**
+     *
+     * @param group
+     */
     public void addGroup(Group group) {
         if (!this.groups.contains(group)) {
             this.groups.add(group);
@@ -101,18 +114,34 @@ public class User {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     *
+     * @param enabled
+     */
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Group> getGroups() {
         return groups;
     }
 
+    /**
+     *
+     * @param groups
+     */
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }

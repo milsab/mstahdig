@@ -13,11 +13,21 @@ import javax.faces.context.FacesContext;
  * @author Milad
  */
 public abstract class AbstractController {
+
+    /**
+     *
+     */
     protected FacesContext context;
 
+    /**
+     *
+     */
     protected AbstractController() {
     }
 
+    /**
+     *
+     */
     @PostConstruct
     protected void postConstruct() {
         context = FacesContext.getCurrentInstance();

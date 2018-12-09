@@ -18,21 +18,44 @@ import javax.inject.Named;
 @Stateless
 public class OrderService extends AbstractService<OrderFood> {
 
+    /**
+     *
+     */
     public OrderService() {
         super(OrderFood.class);
     }
 
+    /**
+     *
+     * @return list of all orders
+     */
     @Override
     public List<OrderFood> findAll() {
         return getEntityManager().createNamedQuery("Order.findAll", OrderFood.class).getResultList();
     }
     
+    /**
+     *
+     * @param username
+     * @return List of orders by username
+     */
     public List<OrderFood> findByUserName(String username){
         return getEntityManager().createNamedQuery("Order.findByUsername", OrderFood.class).setParameter("username", username).getResultList();
     }
+    
+    
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public List<OrderFood> findAll(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Long findTotalOrders(){
+        return  (Long) getEntityManager().createNamedQuery("Order.findTotalOrders").getSingleResult();        
     }
     
 }

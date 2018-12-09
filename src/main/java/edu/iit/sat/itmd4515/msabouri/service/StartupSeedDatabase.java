@@ -17,6 +17,7 @@ public class StartupSeedDatabase {
     @EJB private UserService userSvc;
     @EJB private GroupService groupSvc;
     
+    //I decided to don't use this method
     @PostConstruct
     private void seedDatabase(){
 //        Group adminGroup = new Group("ADMINS", "admin of the system");

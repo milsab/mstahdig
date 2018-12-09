@@ -47,12 +47,19 @@ import javax.validation.constraints.PastOrPresent;
             query = "SELECT o FROM Offer o WHERE o.seller.user.userName = :username"),
     @NamedQuery(
             name = "Offer.findBySearch",
-            query = "SELECT o FROM Offer o WHERE o.title LIKE :keyword AND o.quantity > 0")
+            query = "SELECT o FROM Offer o WHERE o.title LIKE :keyword AND o.quantity > 0"),
+    @NamedQuery(
+            name = "Offer.findTotalOffers",
+            query = "SELECT count(o) FROM Offer o ")    
 })
 public class Offer {
 
     private static final Logger LOG = Logger.getLogger(Offer.class.getName());
 
+    /**
+     *
+     * @return
+     */
     public static Logger getLOG() {
         return LOG;
     }
@@ -104,11 +111,25 @@ public class Offer {
 
     
     // </editor-fold>
+
+    /**
+     *
+     */
     public Offer() {
         this.createdDate = new Date();
         this.qty = new Integer(0);
     }
 
+    /**
+     *
+     * @param title
+     * @param description
+     * @param createdDate
+     * @param unitPrice
+     * @param quantity
+     * @param recipe
+     * @param imageFile
+     */
     public Offer(String title, String description, Date createdDate, BigDecimal unitPrice, Integer quantity, String recipe, String imageFile) {
         this.title = title;
         this.description = description;
@@ -130,6 +151,7 @@ public class Offer {
     /**
      * Helper function to manage both side of one-to-many relationship with
      * OrderFood
+     * @param order
      */
     public void addOrder(OrderFood order) {
         if (!this.getOrders().contains(order)) {
@@ -143,6 +165,7 @@ public class Offer {
     /**
      * Helper function to manage both side of Many-to-Many relationship with
      * Food
+     * @param food
      */
     public void addFood(Food food) {
         if (!this.getFoods().contains(food)) {
@@ -172,42 +195,82 @@ public class Offer {
         this.offerId = offerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getCreatedDate() {
         return createdDate;
     }
 
+    /**
+     *
+     * @param createdDate
+     */
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
+    /**
+     *
+     * @param unitPrice
+     */
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getQuantity() {
         return quantity;
     }
 
+    /**
+     *
+     * @param quantity
+     */
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -217,51 +280,100 @@ public class Offer {
         return "Offer{" + "offerId=" + offerId + ", title=" + title + ", description=" + description + ", createdDate=" + createdDate + ", unitPrice=" + unitPrice + ", quantity=" + quantity + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<OrderFood> getOrders() {
         return orders;
     }
 
+    /**
+     *
+     * @param orders
+     */
     public void setOrders(List<OrderFood> orders) {
         this.orders = orders;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Food> getFoods() {
         return foods;
     }
 
+    /**
+     *
+     * @param foods
+     */
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
 
     // <editor-fold>
+
+    /**
+     *
+     * @return
+     */
     public Seller getSeller() {
         return seller;
     }
 
+    /**
+     *
+     * @param seller
+     */
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRecipe() {
         return recipe;
     }
 
+    /**
+     *
+     * @param recipe
+     */
     public void setRecipe(String recipe) {
         this.recipe = recipe;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getImageFile() {
         return imageFile;
     }
 
+    /**
+     *
+     * @param imageFile
+     */
     public void setImageFile(String imageFile) {
         this.imageFile = imageFile;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getQty() {
         return qty;
     }
 
+    /**
+     *
+     * @param qty
+     */
     public void setQty(Integer qty) {
         this.qty = qty;
     }

@@ -80,10 +80,19 @@ public class Food extends AbstractIdentifiedEntity {
     @Transient
     private Date expiration;
 
-    
+    /**
+     *
+     */
     public Food() {
     }
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param recipe
+     * @param dateCooked
+     */
     public Food(String name, String description, List<String> recipe, Date dateCooked) {
         this.name = name;
         this.description = description;
@@ -93,6 +102,7 @@ public class Food extends AbstractIdentifiedEntity {
     
     /**
      * Helper function to manage both side of many-to-many relationship with Offer
+     * @param offer
      */
     public void addOffer(Offer offer){
         if(!this.getOffers().contains(offer))
@@ -104,6 +114,7 @@ public class Food extends AbstractIdentifiedEntity {
     /**
      * Helper function to manage both side of many-to-one relationship with
      * Seller
+     * @param seller
      */
     public void addSeller(Seller seller) {
         if (!this.getSeller().equals(seller)) {
@@ -169,26 +180,50 @@ public class Food extends AbstractIdentifiedEntity {
         this.recipes = recipes;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateCooked() {
         return dateCooked;
     }
 
+    /**
+     *
+     * @param dateCooked
+     */
     public void setDateCooked(Date dateCooked) {
         this.dateCooked = dateCooked;
     }
 
+    /**
+     *
+     * @return
+     */
     public Seller getSeller() {
         return seller;
     }
 
+    /**
+     *
+     * @param seller
+     */
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Offer> getOffers() {
         return offers;
     }
 
+    /**
+     *
+     * @param offers
+     */
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }

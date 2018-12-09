@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -58,6 +57,12 @@ public class BuyerController extends AbstractController implements Serializable 
     }
 
     // action methods here
+
+    /**
+     *
+     * @param offer
+     * @return The page address that we need to redirect to it.
+     */
     public String doAddOrder(Offer offer) {
 
         Integer qtyy = offer.getQty();
@@ -86,6 +91,11 @@ public class BuyerController extends AbstractController implements Serializable 
 
     }
     
+    /**
+     *
+     * @param buyer
+     * @return The page address that we need to redirect to it.
+     */
     public String doEdit(Buyer buyer) {
         this.buyer = buyer;        
         return "/buyer/editProfile.xhtml";
@@ -111,10 +121,18 @@ public class BuyerController extends AbstractController implements Serializable 
         this.buyer = buyer;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getQty() {
         return qty;
     }
 
+    /**
+     *
+     * @param qty
+     */
     public void setQty(String qty) {
         this.qty = qty;
     }

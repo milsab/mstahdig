@@ -16,12 +16,18 @@ public class SearchController extends AbstractController{
     
     private String keyword;
     
-    
-
+    /**
+     *
+     * @return
+     */
     public String getKeyword() {
         return keyword;
     }
 
+    /**
+     *
+     * @param keyword
+     */
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }

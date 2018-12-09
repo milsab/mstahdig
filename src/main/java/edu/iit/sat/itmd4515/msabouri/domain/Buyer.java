@@ -32,7 +32,10 @@ import javax.validation.constraints.NotBlank;
             query = "select b from Buyer b where b.lastName = :name"),
     @NamedQuery(
             name = "Buyer.findByUsername",
-            query = "select b from Buyer b where b.user.userName = :username")
+            query = "select b from Buyer b where b.user.userName = :username"),
+    @NamedQuery(
+            name = "Buyer.findTotalCustomers",
+            query = "SELECT count(b) FROM Buyer b ")
 })
 public class Buyer {
 
@@ -57,9 +60,20 @@ public class Buyer {
     @JoinColumn(name = "USERNAME")
     private User user;
 
+    /**
+     *
+     */
     public Buyer() {
     }
 
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param gender
+     * @param birthday
+     * @param email
+     */
     public Buyer(String firstName, String lastName, String gender, Date birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,6 +85,7 @@ public class Buyer {
     /**
      * Helper function to manage both side of one-to-many relationship with
      * OrderFood
+     * @param order
      */
     public void addOrder(OrderFood order) {
         if (!this.getOrders().contains(order)) {
@@ -153,10 +168,18 @@ public class Buyer {
         this.birthday = birthday;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getBuyerId() {
         return buyerId;
     }
 
+    /**
+     *
+     * @param buyerId
+     */
     public void setBuyerId(Long buyerId) {
         this.buyerId = buyerId;
     }
@@ -166,24 +189,50 @@ public class Buyer {
         return "Buyer{" + "buyerId=" + buyerId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<OrderFood> getOrders() {
         return orders;
     }
 
+    /**
+     *
+     * @param orders
+     */
     public void setOrders(List<OrderFood> orders) {
         this.orders = orders;
     }
+
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
+
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

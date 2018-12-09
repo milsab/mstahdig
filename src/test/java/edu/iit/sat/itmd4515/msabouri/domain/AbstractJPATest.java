@@ -23,11 +23,29 @@ import org.junit.BeforeClass;
  */
 public abstract class AbstractJPATest {
 
+    /**
+     *
+     */
     protected static EntityManagerFactory emf;
+
+    /**
+     *
+     */
     protected static Validator validator;
+
+    /**
+     *
+     */
     protected EntityManager em;
+
+    /**
+     *
+     */
     protected EntityTransaction tx;
 
+    /**
+     *
+     */
     @BeforeClass
     public static void beforeClassTestFixture() {
         emf = Persistence.createEntityManagerFactory("itmd4515PU_TEST");
@@ -35,11 +53,17 @@ public abstract class AbstractJPATest {
         validator = vf.getValidator();
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void afterClassTestFixture() {
         emf.close();
     }
 
+    /**
+     *
+     */
     @Before
     public void beforeEachTest() {
         em = emf.createEntityManager();
@@ -47,6 +71,9 @@ public abstract class AbstractJPATest {
 
     }
 
+    /**
+     *
+     */
     @After
     public void afterEachTest() {
         if (em != null) {

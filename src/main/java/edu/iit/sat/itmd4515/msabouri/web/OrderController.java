@@ -31,10 +31,18 @@ public class OrderController {
         
     }
 
+    /**
+     *
+     * @return
+     */
     public OrderFood getOrder() {
         return order;
     }
 
+    /**
+     *
+     * @param order
+     */
     public void setOrder(OrderFood order) {
         this.order = order;
     }

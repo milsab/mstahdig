@@ -55,10 +55,18 @@ public class RegisterController extends AbstractController {
     @EJB
     private SellerService sellerService;
     
+    /**
+     *
+     */
     public RegisterController(){
         
     }
     
+    /**
+     *
+     * @param registerController
+     * @return The page address that we need to redirect to it.
+     */
     public String doSignUp(RegisterController registerController) {
         Group group = groupSvc.findByGroupName(this.group);
         User newUser = new User(username, password, true);
@@ -79,73 +87,142 @@ public class RegisterController extends AbstractController {
     }
     
     //Making a seprate thread for sending the email notification
+
+    /**
+     * Sending the WELCOMMING email to the user
+     */
     public void sendEmail(){
         EmailService emailSvc = new EmailService(email, username, password, firstName, lastName);
+        //send email in a different thread
         Thread th = new Thread(emailSvc);
         LOG.info("Starting a new thread to send the email..");
         th.start();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     *
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getBirthday() {
         return birthday;
     }
 
+    /**
+     *
+     * @param birthday
+     */
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGroup() {
         return group;
     }
 
+    /**
+     *
+     * @param group
+     */
     public void setGroup(String group) {
         this.group = group;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     *
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     *
+     * @param gender
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

@@ -21,17 +21,27 @@ import org.junit.Test;
  * @author Milad
  */
 public class BuyerTest extends AbstractJPATest{
+
+    /**
+     *
+     */
     @Before
     public void beforeEachTest() {
         super.beforeEachTest();
     }
 
+    /**
+     *
+     */
     @After
     public void afterEachTest() {
 
         super.afterEachTest();
     }
     
+    /**
+     *
+     */
     @Test
     public void persitenceSellerTest(){
         Buyer buyer = new Buyer("Nas", "Gha", "F", 
@@ -56,6 +66,9 @@ public class BuyerTest extends AbstractJPATest{
                 
     }
     
+    /**
+     *
+     */
     @Test
     public void FirstNameIsBlank(){
         Buyer buyer = new Buyer(" ", "abc", "mail", 
@@ -71,6 +84,10 @@ public class BuyerTest extends AbstractJPATest{
             System.out.println(bad.toString() + " " + bad.getPropertyPath() + " " + bad.getMessage());
         }
     }
+
+    /**
+     *
+     */
     @Test
     public void LastNameIsBlank(){
         Buyer buyer = new Buyer("abc", " ", "mail", 

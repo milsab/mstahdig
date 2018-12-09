@@ -20,16 +20,25 @@ import org.junit.Test;
  */
 public class OfferTest extends AbstractJPATest {
 
+    /**
+     *
+     */
     @Before
     public void beforeEachTest() {
         super.beforeEachTest();
     }
 
+    /**
+     *
+     */
     @After
     public void afterEachTest() {
         super.afterEachTest();
     }
 
+    /**
+     *
+     */
     @Test
     public void persitenceOfferTest() {
         Offer offer = new Offer("Offer Title", "Offer Description",
@@ -41,6 +50,9 @@ public class OfferTest extends AbstractJPATest {
         tx.commit();
     }
     
+    /**
+     *
+     */
     @Test
     public void unitPriceAcceptMax1000Test() {
         
@@ -61,6 +73,9 @@ public class OfferTest extends AbstractJPATest {
         assertEquals("must be less than or equal to 1000.00", constraintViolations.iterator().next().getMessage());
     }
     
+    /**
+     *
+     */
     @Test
     public void unitPriceAcceptMinZeroTest() {
         Offer offer = new Offer("title", "description",
@@ -80,6 +95,9 @@ public class OfferTest extends AbstractJPATest {
         assertEquals("must be greater than or equal to 0.00", constraintViolations.iterator().next().getMessage());
     }
     
+    /**
+     *
+     */
     @Test
     public void createdDateMustBePastOrPresentTest() {
         Offer offer = new Offer("title", "description",

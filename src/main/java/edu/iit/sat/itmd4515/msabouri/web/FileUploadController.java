@@ -30,14 +30,26 @@ public class FileUploadController extends AbstractController implements Serializ
             .getExternalContext().getContext();
     String path = servletContext.getRealPath("");
 
+    /**
+     *
+     * @return
+     */
     public Part getUploadedFile() {
         return uploadedFile;
     }
 
+    /**
+     *
+     * @param uploadedFile
+     */
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
 
+    /**
+     *
+     * @param fileName
+     */
     public void saveFile(String fileName) {
 
         try (InputStream input = uploadedFile.getInputStream()) {

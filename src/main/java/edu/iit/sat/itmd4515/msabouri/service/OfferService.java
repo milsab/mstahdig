@@ -25,10 +25,18 @@ public class OfferService extends AbstractService<Offer> {
 
     private List<Offer> searchResults;
 
+    /**
+     *
+     */
     public OfferService() {
         super(Offer.class);
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public List<Offer> findByUserName(String username) {
         return getEntityManager()
                 .createNamedQuery("Offer.findByUsername", Offer.class)
@@ -36,6 +44,12 @@ public class OfferService extends AbstractService<Offer> {
                 .getResultList();
     }
 
+    /**
+     *
+     * @param offer
+     * @param username
+     * @return the page address that we need to redirect to it.
+     */
     public String create(Offer offer, String username) {
         Seller seller = sellerSvc.findByUserName(username);
         offer.setSeller(seller);
@@ -55,6 +69,12 @@ public class OfferService extends AbstractService<Offer> {
         return "/seller/offer?faces-redirect=true";
     }
 
+    /**
+     *
+     * @param offer
+     * @param username
+     * @return the page address that we need to redirect to it.
+     */
     public String update(Offer offer, String username) {
         Seller seller = sellerSvc.findByUserName(username);
         offer.setSeller(seller);
@@ -62,6 +82,10 @@ public class OfferService extends AbstractService<Offer> {
         return "/seller/offer.xhtml";
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Offer> findAll() {
         return getEntityManager()
@@ -69,6 +93,11 @@ public class OfferService extends AbstractService<Offer> {
                 .getResultList();
     }
 
+    /**
+     *
+     * @param keyword
+     * @return the page address that we need to redirect to it.
+     */
     public String findAllBySearch(String keyword) {
 
         searchResults = getEntityManager()
@@ -78,25 +107,49 @@ public class OfferService extends AbstractService<Offer> {
         return "/buyer/searchResults";
 
     }
+    
+    public Long findTotalOffers(){
+        return  (Long) getEntityManager().createNamedQuery("Offer.findTotalOffers").getSingleResult();        
+    }
 
+    /**
+     *
+     * @return List of all available offers
+     */
     public List<Offer> findAllAvailables() {
         return getEntityManager()
                 .createNamedQuery("Offer.findAllAvailables", Offer.class)
                 .getResultList();
     }
 
+    /**
+     *
+     * @return
+     */
     public Part getUploadedFile() {
         return uploadedFile;
     }
 
+    /**
+     *
+     * @param uploadedFile
+     */
     public void setUploadedFile(Part uploadedFile) {
         this.uploadedFile = uploadedFile;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Offer> getSearchResults() {
         return searchResults;
     }
 
+    /**
+     *
+     * @param searchResults
+     */
     public void setSearchResults(List<Offer> searchResults) {
         this.searchResults = searchResults;
     }

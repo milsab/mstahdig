@@ -21,10 +21,17 @@ public class UserService extends AbstractService<User> {
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
     
+    /**
+     *
+     */
     public UserService() {
         super(User.class);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<User> findAll() {
         return getEntityManager().createNamedQuery("User.findAll", User.class).getResultList();

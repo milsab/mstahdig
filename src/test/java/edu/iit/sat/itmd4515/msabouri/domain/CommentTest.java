@@ -23,16 +23,26 @@ import org.junit.Test;
  * @author Milad
  */
 public class CommentTest extends AbstractJPATest{
+
+    /**
+     *
+     */
     @Before
     public void beforeEachTest() {
         super.beforeEachTest();
     }
 
+    /**
+     *
+     */
     @After
     public void afterEachTest() {
         super.afterEachTest();
     }
     
+    /**
+     *
+     */
     @Test
     public void persitenceFirstCommnetTest(){
         Comment comment = new Comment("First Comment", 
@@ -63,6 +73,9 @@ public class CommentTest extends AbstractJPATest{
         
     }
     
+    /**
+     *
+     */
     @Test
     public void textIsBlank(){
         Comment comment = new Comment("Title", " ", 

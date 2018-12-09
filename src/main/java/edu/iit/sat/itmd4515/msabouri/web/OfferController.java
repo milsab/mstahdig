@@ -34,6 +34,10 @@ public class OfferController {
 
     }
 
+    /**
+     *
+     * @return The page address that we need to redirect to it.
+     */
     public String executeSaveOffer() {
         LOG.info("Inside OfferController executeSaveOffer");
         this.offer = offer;
@@ -42,12 +46,22 @@ public class OfferController {
         return "/seller/offer.xhtml";
     }
 
+    /**
+     *
+     * @param offer
+     * @return The page address that we need to redirect to it.
+     */
     public String doEdit(Offer offer) {
         this.offer = offer;
         this.seller = offer.getSeller();
         return "/seller/editOffer.xhtml";
     }
 
+    /**
+     *
+     * @param offer
+     * @return The page address that we need to redirect to it.
+     */
     public String doRemove(Offer offer) {
         this.offer = offer;
         if (offerSvc.remove(offer) == null) {
@@ -57,6 +71,11 @@ public class OfferController {
         }
     }
 
+    /**
+     *
+     * @param offer
+     * @return The page address that we need to redirect to it.
+     */
     public String doUpdate(Offer offer) {
         return "/seller/offer.xhtml";
     }

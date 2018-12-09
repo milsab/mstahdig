@@ -29,9 +29,19 @@ public class Customer extends AbstractIdentifiedEntity{
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
+    /**
+     *
+     */
     public Customer() {
     }
     
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param gender
+     * @param birthday
+     */
     public Customer(String firstName, String lastName, String gender, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
