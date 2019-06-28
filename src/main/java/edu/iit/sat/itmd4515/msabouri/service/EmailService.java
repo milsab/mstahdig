@@ -68,8 +68,8 @@ public class EmailService implements Runnable {
      * after registration
      */
     public void sendWithDefaultMessage() {
-        String _from = "meal.sharingservice@gmail.com";
-        String _password = "Ng101840";
+        String _from = "A78B347F656";
+        String _password = "55EE29A8C";
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
